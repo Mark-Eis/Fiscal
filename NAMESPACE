@@ -1,0 +1,3 @@
+S3method(format,incometax)
+S3method(print,incometax)
+export("allowance", "incometax", "pers_allow", "tax_opts")

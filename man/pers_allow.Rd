@@ -52,7 +52,7 @@ Other income_tax:
 \examples{
 
 ## Create an ascending sequence of possible taxable incomes
-(newseq <- with(tax_opts(), seq(log(1e5), log(std_allow * 2 + 1e5), length.out = 10) |> exp() |> round(0)))
+newseq <- with(tax_opts(), round(exp(seq(log(1e5), log(std_allow * 2 + 1e5), length.out = 10)), 0))
 
 ## Calculate personal allowances on the basis of this sequence
 pers_allow(newseq) |> setNames(newseq)

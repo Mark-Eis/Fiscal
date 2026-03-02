@@ -24,7 +24,7 @@ tax_opts(
   \item{rate}{a \code{numeric} vector giving the \emph{basic}, \emph{higher} and \emph{additional}
     tax rates.}
   
-  \item{std_allow}{the standard allowance.}
+  \item{std_allow}{the standard Personal Allowance.}
   
   \item{allow_upper}{upper income limit above which the standard allowance is reduced.}
 }
@@ -36,14 +36,8 @@ Earnings exceeding the personal allowance by an amount up to and including the v
 \code{band[1]} attract \emph{basic rate} income tax; earnings exceeding the personal allowance plus
 \code{band[1]} by an amount up to and including the value of \code{band[2]} attract
 \emph{higher rate} income tax; and earnings exceeding the personal allowance plus the value of
-\code{\link{sum}(band)} attract \emph{additional rate} income tax.
-
-Hence currently in 2026, earnings exceeding the standard personal allowance (in the simplest case
-£12,570) by an amount up to £37,700 attract 20\% basic rate income tax; earnings exceeding the
-standard personal allowance by amounts between £37,701 and £125,140 attract 40\% higher rate income
-tax; and earnings exceeding the personal allowance by £125,141 or more attract 45\% additional rate
-income tax; see GOV.UK 
-\href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands}.
+\code{\link{sum}(band)} attract \emph{additional rate} income tax. See \code{\link{incometax}()}
+\emph{Details} for further information.
 
 Argument \code{allow_upper} is an earnings threshold above which the personal allowance goes down by
 £1 for every £2 taxable income exceeds it, see GOV.UK

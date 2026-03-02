@@ -20,7 +20,7 @@ devtools::install_github("Mark-Eis/Fiscal")
 
 **ORCID** = [0000-0001-6843-3345](https://orcid.org/0000-0001-6843-3345)
 
-### Transition Package Overview: –
+### Fiscal Package Overview: –
 
 * Estimate annual income tax within the different taxation bands at specified levels of both taxable income and the Personal Allowance, emulating the results obtained at UK.GOV <https://www.gov.uk/estimate-income-tax> using `incometax()`.
 

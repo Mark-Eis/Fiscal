@@ -8,6 +8,7 @@ function(income, allowance = NULL, opts = tax_opts()) {
 		allowance <- allowance %||% pers_allow(income, opts)
 		taxable <- max(income - allowance, 0)
 		taxablef <- max(taxable - max(min(((sum(band) + 18 - income) / 2), 9), 0), 0) # fudge factor
+		band[2] <- band[2] - 1
 		if (taxablef > band[1] + band[2])
 			c(band[1] * rate[1], band[2] * rate[2], (taxablef - band[1] - band[2]) * rate[3])
 		else

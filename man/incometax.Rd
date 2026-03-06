@@ -15,9 +15,9 @@ incometax(income, allowance = NULL, opts = tax_opts())
 \arguments{
   \item{income}{\code{numeric}, annual taxable income.}
   
-  \item{allowance}{\code{numeric}, personal allowance; default, see details.}
+  \item{allowance}{\code{numeric}, personal allowance or pay adjustment; see Details.}
   
-  \item{opts}{options, as created by \code{\link{tax_opts}()}, see details.}
+  \item{opts}{options, as created by \code{\link{tax_opts}()}, see Details.}
   
   \item{x}{object of class \code{"incometax"} created by function \code{incometax()}.}
   
@@ -57,8 +57,9 @@ See GOV.UK
 \href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands}.
 
 Argument \code{allowance} may be used to specify the
-\href{https://www.gov.uk/income-tax-rates}{Personal Allowance}, otherwise its default value will be
-calculated using \code{\link{pers_allow}(income, opts)}.
+\href{https://www.gov.uk/income-tax-rates}{Personal Allowance}, or if negative, a
+\href{https://www.gov.uk/tax-codes/k-in-your-tax-code}{K code pay adjustment}; otherwise, its
+default value will be calculated using \code{\link{pers_allow}(income, opts)}.
 
 Argument \code{opts} specifying values for tax bands, rates and allowances must be provided using
 \code{\link{tax_opts}()}, which by default gives GOV.UK
@@ -75,7 +76,12 @@ allowance and tableable pay respectively.
 \code{print()} and \code{format()} methods are provided for class \code{"incometax"}.
 }
 \references{
-GOV.UK \href{https://www.gov.uk/estimate-income-tax}{Estimate your Income Tax for the current year}
+GOV.UK: --
+\itemize{
+\item \href{https://www.gov.uk/estimate-income-tax}{Estimate your Income Tax for the current year}
+\item \href{https://www.gov.uk/income-tax-rates}{Personal Allowance}
+\item \href{https://www.gov.uk/tax-codes}{Tax codes}
+}
 }
 \author{
 \packageAuthor{Fiscal}

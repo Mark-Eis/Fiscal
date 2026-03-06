@@ -31,13 +31,14 @@ function(x, ...) {
 	tmp <- prettyL(x)
 	len <- nchar(tmp)
 	maxlen <- max(max(len), 3)
-	cat("Rate:", paste0(paste0(rep(" ", maxlen - 2), collapse = ""), names(x), collapse = ""),
-		"\nTax: ", paste0(paste(lapply(maxlen - len + 1, \(x) paste0(rep(" ", x), collapse = ""))), tmp, collapse = ""),
-		"\nTotal tax: ", prettyL(sum(x)),
-		"\nAllowance: ", prettyL(attr(x, "allowance")),
-		"\nTaxable:   ", prettyL(attr(x, "taxable")), "\n\n")
+    spacer <- if (attr(x, "adjusted")) "      " else ""
+    cat(
+        "Rate:", paste0(paste0(rep(" ", maxlen - 2), collapse = ""), names(x), collapse = ""),
+        "\nTax: ", paste0(paste(lapply(maxlen - len + 1, function(x) paste0(rep(" ", x), collapse = ""))), tmp, collapse = ""),
+        "\nTotal tax:", spacer, prettyL(sum(x)), 
+        if (attr(x, "adjusted")) "\nPay adjustment:  " else "\nAllowance: ", prettyL(abs(attr(x, "allowance"))),
+        if (attr(x, "adjusted")) "\nAdjusted Taxable:" else "\nTaxable:   ", prettyL(attr(x, "taxable")), "\n\n")
 }
-
 
 print.incometax <-
 function(x, ...) {

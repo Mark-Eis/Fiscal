@@ -124,7 +124,7 @@ incometax(125140 + 10000)
 allowance(125140 + 10000, 47016.05 + 600)
 
 ## Demonstrate that correct additional amount of £600
-## i.e., a total of £47,616 is recouped
+## i.e., a total of £47,616.05 is recouped
 incometax(125140 + 10000, -1333.333)
 
 }

@@ -22,7 +22,7 @@ function(income, allowance = NULL, opts = tax_opts()) {
 	} |>
 	round(2) |>
 	setNames(paste0(c(rate[1], rate[2], rate[3]) * 100, "%")) |>
-	structure(class = "incometax", allowance = allowance, taxable = taxable, adjusted = allowance < 0))
+	structure(class = "incometax", allowance = allowance, taxable = taxable))
 }
 
 
@@ -31,13 +31,14 @@ function(x, ...) {
 	tmp <- prettyL(x)
 	len <- nchar(tmp)
 	maxlen <- max(max(len), 3)
-    spacer <- if (attr(x, "adjusted")) "      " else ""
+	adj <- attr(x, "allowance") < 0
+    spacer <- if (adj) "      " else ""
     cat(
         "Rate:", paste0(paste0(rep(" ", maxlen - 2), collapse = ""), names(x), collapse = ""),
         "\nTax: ", paste0(paste(lapply(maxlen - len + 1, function(x) paste0(rep(" ", x), collapse = ""))), tmp, collapse = ""),
         "\nTotal tax:", spacer, prettyL(sum(x)), 
-        if (attr(x, "adjusted")) "\nPay adjustment:  " else "\nAllowance: ", prettyL(abs(attr(x, "allowance"))),
-        if (attr(x, "adjusted")) "\nAdjusted Taxable:" else "\nTaxable:   ", prettyL(attr(x, "taxable")), "\n\n")
+        if (adj) "\nPay adjustment:  " else "\nAllowance: ", prettyL(abs(attr(x, "allowance"))),
+        if (adj) "\nAdjusted Taxable:" else "\nTaxable:   ", prettyL(attr(x, "taxable")), "\n\n")
 }
 
 print.incometax <-

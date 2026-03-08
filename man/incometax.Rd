@@ -119,13 +119,13 @@ incometax(12579)
 all.equal(incometax(12579), incometax(12579, 12570))
 
 ## Base rate tax applied to earnings above personal allowance
-incometax(12579 + 1000)
+incometax(12570 + 1009)
 
 ## ...up to base rate band limit
-incometax(12579 + 37700)
+incometax(12570 + 37709)
 
 ## Higher rate applied to earnings above base rate band
-incometax(12579 + 37700 + 1000)
+incometax(12570 + 37700 + 1009)
 
 ## ...up to personal allowance limit of £100,000
 incometax(100000)

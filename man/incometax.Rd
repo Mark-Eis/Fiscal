@@ -109,10 +109,11 @@ Other income_tax:
 ## Income equal to standard personal allowance
 incometax(12570)
 
-## Specifying personal allowance explicitly
+## Specifying standard personal allowance explicitly
 all.equal(incometax(12570), incometax(12570, 12570))
 
 ## In practice, £9 is added to personal allowance
+## before tax applied
 incometax(12579)
 
 all.equal(incometax(12579), incometax(12579, 12570))
@@ -139,8 +140,12 @@ incometax(100000 + 20000)
 ## personal allowance is zero
 incometax(125140)
 
-## Above an income of £125,140
+## Above an income of £125,145
 ## additional rate tax is applied
+incometax(125145)
+
+incometax(125146)
+
 incometax(125140 + 10000)
 }
 

@@ -20,21 +20,25 @@ allowance(taxable, deficit = NULL, opts = tax_opts())
 \details{
 Income tax deficits are recouped by adjusting the Personal Allowance. \code{allowance()} calculates
 the personal allowance required to recoup a specified amount of tax over the course of a year for a
-given taxable income.
+given taxable income. This can be a negative amount, in which case it may be referred to as a
+\emph{pay adjustment}.
 
-Argument \code{deficit} represents the amount of tax to recoup.
+Argument \code{deficit} represents the total amount of tax to recoup, including the usual amount
+plus any additional deficit.
 
 Argument \code{opts} specifying values for tax bands, rates and allowances must be provided using
 \code{\link{tax_opts}()}, which by default gives GOV.UK
 \href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past}{values for 2025-2027 tax years}.
-
-See GOV.UK \href{https://www.gov.uk/tax-codes/what-your-tax-code-means}{Tax codes}
 }
 \value{
 A \code{numeric}, representing value of the Personal Allowance required to recoup the deficit.
 }
 \references{
-GOV.UK \href{https://www.gov.uk/tax-codes/what-your-tax-code-means}{Tax codes}
+GOV.UK: --
+\itemize{
+\item \href{https://www.gov.uk/income-tax-rates}{Personal Allowance}
+\item \href{https://www.gov.uk/tax-codes/k-in-your-tax-code}{K code pay adjustment}
+}
 }
 \author{
 \packageAuthor{Fiscal}
@@ -60,45 +64,45 @@ Other income_tax:
 ## than the standard personal allowance
 allowance(12570, 600)
 
-## Demonstrate that correct amount of £600 is recouped
+## Demonstrate that correct amount of £600, is recouped
 incometax(12570, 9561)
 
 ####
 ## Tax deficit of £200 at salary within 20\% band 1
-allowance(12579 + 1000, 200)
+allowance(12570 + 1009, 200)
 
-## This is simply the usual amount of tax
-incometax(12579 + 1000)
+## This deficit is simply the usual amount of tax
+incometax(12570 + 1009)
 
 ####
 ## Tax deficit of additional £600 at salary within 20\% band
-allowance(12579 + 1000, 200 + 600)
+allowance(12570 + 1009, 200 + 600)
 
 ## Demonstrate that correct additional amount of £600
-## i.e., a total of £800 is recouped
-incometax(12579 + 1000, 9570)
+## i.e., a tax total of £800, is recouped
+incometax(12570 + 1009, 9570)
 
 ####
 ## Tax deficit of £7,940 at salary within 40\% band
-allowance(12579 + 37700 + 1000, 7940)
+allowance(12570 + 37700 + 1009, 7940)
 
-## This is simply the usual amount of tax
-incometax(12579 + 37700 + 1000)
+## This deficit is simply the usual amount of tax
+incometax(12570 + 37700 + 1009)
 
 ####
 ## Tax deficit of additional £600 at salary within 40\% band
-allowance(12579 + 37700 + 1000, 7940 + 600)
+allowance(12570 + 37700 + 1009, 7940 + 600)
 
 ## Demonstrate that correct additional amount of £600
-## i.e., a total of £8,540 is recouped
-incometax(12579 + 37700 + 1000, 11070)
+## i.e., a tax total of £8,540, is recouped
+incometax(12570 + 37700 + 1009, 11070)
 
 ####
 ## Tax deficit of £42,512.40 at salary within 40\% band
 ## (at the upper limit of the standard Personal Allowance)
 allowance(125140, 42512.4)
 
-## This is simply the usual amount of tax
+## This deficit is simply the usual amount of tax
 incometax(125140)
 
 ####
@@ -107,15 +111,15 @@ incometax(125140)
 allowance(125140, 42512.4 + 600)
 
 ## Demonstrate that correct additional amount of £600
-## i.e., a total of £43,112.40 is recouped
-incometax(125140, -1334.333)
+## i.e., a tax total of £43,112.40, is recouped
+incometax(125140, -1325.222)
 
 ####
 ## Tax deficit of £47,016.05 at salary within 45\% band
 ## (above the upper limit of the Personal Allowance)
 allowance(125140 + 10000, 47016.05)
 
-## This is simply the usual amount of tax
+## This deficit is simply the usual amount of tax
 incometax(125140 + 10000)
 
 ####
@@ -124,7 +128,7 @@ incometax(125140 + 10000)
 allowance(125140 + 10000, 47016.05 + 600)
 
 ## Demonstrate that correct additional amount of £600
-## i.e., a total of £47,616.05 is recouped
+## i.e., a tax total of £47,616.05, is recouped
 incometax(125140 + 10000, -1333.333)
 
 }

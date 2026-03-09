@@ -37,8 +37,8 @@ function(x, ...) {
         "Rate:", paste0(paste0(rep(" ", maxlen - 2), collapse = ""), names(x), collapse = ""),
         "\nTax: ", paste0(paste(lapply(maxlen - len + 1, function(x) paste0(rep(" ", x), collapse = ""))), tmp, collapse = ""),
         "\nTotal tax:", spacer, prettyL(sum(x)), 
-        if (adj) "\nPay adjustment:  " else "\nAllowance: ", prettyL(abs(attr(x, "allowance"))),
-        if (adj) "\nAllowance:        £0",
+        if (adj) paste("\nPay adjustment:" , prettyL(abs(attr(x, "allowance"))), sep = "   "),
+        "\nAllowance: ", if (adj) "      £0" else prettyL(attr(x, "allowance")),
         if (adj) "\nAdjusted Taxable:" else "\nTaxable:   ", prettyL(attr(x, "taxable")), "\n\n")
 }
 

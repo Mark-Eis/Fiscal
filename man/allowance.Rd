@@ -118,19 +118,19 @@ incometax(125140, -1325.222)
 ####
 ## Tax deficit of £47,016.05 at salary within 45\% band
 ## (above the upper limit of the Personal Allowance)
-allowance(125140 + 10000, 47016.05)
+allowance(135140, 47016.05)
 
 ## This deficit is simply the usual amount of tax
-incometax(125140 + 10000)
+incometax(135140)
 
 ####
 ## Tax deficit of additional £600 at salary within 45\% band
 ## (above the upper limit of the Personal Allowance)
-allowance(125140 + 10000, 47016.05 + 600)
+allowance(135140, 47016.05 + 600)
 
 ## Demonstrate that correct additional amount of £600
 ## i.e., a tax total of £47,616.05, is recouped
-incometax(125140 + 10000, -1333.333)
+incometax(135140, -1333.333)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

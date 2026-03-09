@@ -20,18 +20,19 @@ allowance(taxable, deficit = NULL, opts = tax_opts())
 \details{
 Income tax deficits are recouped by adjusting the Personal Allowance. \code{allowance()} calculates
 the personal allowance required to recoup a specified amount of tax over the course of a year for a
-given taxable income. This can be a negative amount, in which case it may be referred to as a
-\emph{pay adjustment}.
+given taxable income. The allowance calculated can be a negative amount, in which case it may be
+referred to as a \emph{pay adjustment}.
 
 Argument \code{deficit} represents the total amount of tax to recoup, including the usual amount
-plus any additional deficit.
+plus any additional outstanding deficit.
 
 Argument \code{opts} specifying values for tax bands, rates and allowances must be provided using
 \code{\link{tax_opts}()}, which by default gives GOV.UK
 \href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past}{values for 2025-2027 tax years}.
 }
 \value{
-A \code{numeric}, representing value of the Personal Allowance required to recoup the deficit.
+A \code{numeric}, representing value of the Personal Allowance or if negative, Pay Adjustment,
+required to recoup the deficit.
 }
 \references{
 GOV.UK: --

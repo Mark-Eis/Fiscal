@@ -21,7 +21,7 @@ allowance(taxable, deficit = NULL, opts = tax_opts())
 Income tax deficits are recouped by adjusting the Personal Allowance. \code{allowance()} calculates
 the personal allowance required to recoup a specified amount of tax over the course of a year for a
 given taxable income. The allowance calculated can be a negative amount, in which case it may be
-referred to as a \emph{pay adjustment}.
+referred to as a \emph{Pay Adjustment}.
 
 Argument \code{deficit} represents the total amount of tax to recoup, including the usual amount
 plus any additional outstanding deficit.

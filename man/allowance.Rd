@@ -1,5 +1,6 @@
 \name{allowance}
 \alias{allowance}
+\alias{adjustment}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Personal tax allowance adjusted to recoup a tax deficit

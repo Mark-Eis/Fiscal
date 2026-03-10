@@ -65,6 +65,7 @@ Argument \code{opts} specifying values for tax bands, rates and allowances must 
 \code{\link{tax_opts}()}, which by default gives GOV.UK
 \href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past}{values for 2025-2027 tax years}.
 
+\code{\link{print}()} and \code{\link{format}()} methods are provided for class \code{"incometax"}, see Value.
 }
 \value{
 \code{incometax()} returns an object of class \code{"incometax"} comprising a named \code{numeric}
@@ -72,8 +73,6 @@ vector of length three, with names derived from the three tax rates provided usi
 \code{\link{tax_opts}()} i.e., \code{c(20\%, 40\%, 45\%)} for the 2025-2027 tax years; and
 \code{numeric} attributes \code{"allowance"} and \code{"taxable"}, representing the personal
 allowance and tableable pay respectively.
-
-\code{print()} and \code{format()} methods are provided for class \code{"incometax"}.
 }
 \references{
 GOV.UK: --

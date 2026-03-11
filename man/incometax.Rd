@@ -24,17 +24,17 @@ incometax(income, allowance = NULL, opts = tax_opts())
   \item{...}{further arguments passed to or from other methods.}
 }
 \details{
-\code{incometax()} estimates income tax payable on PAYE earnings in England, Northern Ireland and
+\code{incometax()} estimates income tax payable on PAYE income in England, Northern Ireland and
 Wales, and is intended to replicate the estimates of GOV.UK
 \href{https://www.gov.uk/estimate-income-tax}{Estimate your Income Tax for the current year}.
 
 Tax is paid on the amount of taxable income remaining after the Personal Allowance has been
-deducted, and is allocated among the \emph{basic}, \emph{higher} and \emph{additional} rate bands.
-Earnings exceeding the personal allowance by an amount up to and including the upper limit of the
-basic rate band attract \emph{basic rate} income tax; earnings exceeding the personal allowance plus
-the basic rate band by an amount up to and including the upper limit of the higher rate band attract
-\emph{higher rate} income tax; and earnings exceeding the personal allowance plus the sum of the
-basic and higher rate bands attract \emph{additional rate} income tax.
+deducted, and is allocated among the \emph{basic}, \emph{higher} and \emph{additional} rates.
+Income exceeding the personal allowance by an amount up to and including the upper limit of the
+basic rate band attracts \emph{basic rate} income tax; income exceeding the personal allowance plus
+the basic rate band by an amount up to and including the upper limit of the higher rate band attracts
+\emph{higher rate} income tax; and income exceeding the personal allowance plus the sum of the
+basic and higher rate bands attracts \emph{additional rate} income tax.
 
 The standard Personal Allowance is the amount of taxable income on which there is no tax liability,
 currently £12,570. The personal allowance goes down by £1 for every £2 that
@@ -117,13 +117,13 @@ incometax(12579)
 
 all.equal(incometax(12579), incometax(12579, 12570))
 
-## Base rate tax applied to earnings above personal allowance
+## Base rate tax applied to income above personal allowance
 incometax(12570 + 1009)
 
 ## ...up to base rate band limit
 incometax(12570 + 37709)
 
-## Higher rate applied to earnings above base rate band
+## Higher rate applied to income above base rate band
 incometax(12570 + 37700 + 1009)
 
 ## ...up to personal allowance limit of £100,000

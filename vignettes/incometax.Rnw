@@ -1,0 +1,171 @@
+% File src/library/Fiscal/vignettes/incometax.Rnw
+% Part of the Fiscal package, https://mark-eis.github.io/Fiscal/
+% Copyright 2026 Mark Eisler
+% Distributed under the MIT License
+
+\documentclass[a4paper]{article}
+
+\usepackage{Rd}
+\usepackage{hyperref}
+\usepackage[en-GB]{datetime2}
+
+\hypersetup{colorlinks = true, linkcolor = blue, urlcolor = blue}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{.1in}
+\setlength{\textwidth}{140mm}
+\setlength{\oddsidemargin}{10mm}
+
+\title{PAYE income tax calculator for England, Northern~Ireland and Wales}
+\author{Mark Eisler}
+% \VignetteIndexEntry{Converting numeric values to class "Date"}
+% \VignettePackage{Fiscal}
+
+\begin{document}
+
+\maketitle
+
+<<echo=FALSE, results=hide>>=
+library(Fiscal)
+options(width = 80, continue = "  ",
+        try.outFile = stdout())
+@
+
+\tableofcontents 
+
+\section{Introduction}
+
+\code{incometax()} estimates income tax payable on PAYE income in England, Northern Ireland and
+Wales, and is intended to replicate the estimates of GOV.UK
+\href{https://www.gov.uk/estimate-income-tax}{Estimate your Income Tax for the current year}\footnote{
+	\code{incometax()} does not currently calculate \emph{National Insurance} (NI)
+contributions, and should therefore return values equal to the estimates from the GOV.UK website
+with \dQuote{no} as the answer to the question \sQuote{Are you over the State Pension age?} For NI
+information see:
+\href{https://www.gov.uk/government/publications/rates-and-allowances-national-insurance-contributions/rates-and-allowances-national-insurance-contributions}{Rates and allowances: National Insurance contributions.}}.
+
+Tax is paid on the amount of taxable income remaining after the Personal Allowance has been
+deducted, and is allocated among the \emph{basic}, \emph{higher} and \emph{additional} rates.
+Income exceeding the personal allowance by an amount up to and including the upper limit of the
+basic rate band attracts \emph{basic rate} income tax; income exceeding the personal allowance plus
+the basic rate band by an amount up to and including the upper limit of the higher rate band attracts
+\emph{higher rate} income tax; and income exceeding the personal allowance plus the sum of the
+basic and higher rate bands attracts \emph{additional rate} income tax.
+
+The standard Personal Allowance is the amount of taxable income on which there is no tax liability,
+currently \pounds12,570. The personal allowance goes down by \pounds1 for every \pounds2 that
+\href{https://www.gov.uk/guidance/adjusted-net-income}{adjusted net income} is above an upper
+threshold, currently \pounds100,000. This means the personal allowance is zero if taxable income is
+\pounds125,140 or above.
+
+Hence currently in 2026: --
+\itemize{
+  \item taxable income exceeding the standard personal allowance (in the simplest case \pounds12,570) by
+    an amount up to \pounds37,700 attracts 20\% basic rate income tax\footnote{In practice, an additional
+    	\pounds9 income is allowed before basic and higher tax is applied.};
+  \item taxable income up to \pounds100,000 overall and exceeding the standard personal allowance by
+    amounts between \pounds37,701 and \pounds87,430 attracts 40\% higher rate income tax;
+  \item taxable income above \pounds100,000 overall exceeding the reduced personal allowance by amounts
+    between \pounds87,430 and \pounds125,140 attracts 40\% higher rate income tax; and
+  \item taxable income above \pounds125,140 has no personal allowance and attracts 45\% additional rate
+    income tax\footnote{In practice, an additional \pounds5 income is allowed before additional rate tax is applied.}.
+}  
+
+See GOV.UK 
+\href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands}.
+
+\section{Income up to the Personal Allowance}
+Income equal to standard personal allowance is not taxed: --
+
+<<>>=
+incometax(12570)
+@
+
+Specifying standard personal allowance explicitly is identical: --
+
+<<>>=
+all.equal(incometax(12570), incometax(12570, 12570))
+@
+
+In practice, an additional \pounds9 income is allowed before tax is applied: --
+
+<<>>=
+incometax(12579)
+
+all.equal(incometax(12579), incometax(12579, 12570))
+@
+
+\section{Income Above the Personal Allowance}
+Base rate tax is applied to income above the standard personal
+allowance (plus \pounds9): --
+
+<<>>=
+incometax(12570 + 1009)
+@
+
+...or above a specified personal allowance: --
+
+<<>>=
+incometax(5000 + 1009, 5000)
+
+incometax(1009, 0)
+@
+
+...up to the base rate band limit of \pounds37,700: --
+
+<<>>=
+incometax(12570 + 37709)
+
+incometax(5000 + 37709, 5000)
+
+incometax(37709, 0)
+@
+
+\section{Income Above the Base Rate Band}
+Higher rate income tax is applied to income above the base rate band: --
+
+<<>>=
+incometax(12570 + 37700 + 1009)
+
+incometax(5000 + 37700 + 1009, 5000)
+
+incometax(37700 + 1009, 0)
+@
+
+\section{Income Above the Personal Allowance Limit}
+The standard personal allowance is applicable to an upper limit
+of \pounds100,000: --
+
+<<>>=
+incometax(100000)
+@
+
+For every \pounds2 of income above this  \pounds100,000 limit, the
+personal allowance decreases by~\pounds1: --
+
+<<>>=
+incometax(100000 + 4000)
+
+incometax(100000 + 20000)
+@
+
+Hence, at an income of \pounds125,140, personal allowance is zero: --
+
+<<>>=
+incometax(125140)
+@
+
+\section{Income Above the Higher Rate Band}
+
+Above an income of \pounds125,145 i.e., above the higher rate band
+plus \pounds5, additional rate tax is applied: --
+
+<<>>=
+incometax(125145)
+
+incometax(125146)
+
+incometax(125140 + 10000)
+@
+
+\end{document}

@@ -30,7 +30,7 @@ tax_opts(
 }
 \details{
 Tax is paid on the amount of taxable income remaining after the Personal Allowance has been
-deducted, allocated among the \emph{basic}, \emph{higher} and \emph{additional} rate bands.
+deducted, allocated among the \emph{basic}, \emph{higher} and \emph{additional} rates.
 
 Earnings exceeding the personal allowance by an amount up to and including the value of
 \code{band[1]} attract \emph{basic rate} income tax; earnings exceeding the personal allowance plus

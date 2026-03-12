@@ -54,7 +54,8 @@ Hence currently in 2026: --
     income tax.
 }  
 See GOV.UK 
-\href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands}.
+\href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands} and vignette 
+\href{../doc/incometax.pdf}{PAYE income tax calculator for England, Northern Ireland and Wales} for examples.
 
 Argument \code{allowance} may be used to specify the
 \href{https://www.gov.uk/income-tax-rates}{Personal Allowance}, or if negative, a

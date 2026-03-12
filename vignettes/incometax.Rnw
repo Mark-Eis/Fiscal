@@ -75,13 +75,13 @@ See GOV.UK
 \href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands}.
 
 \section{Income up to the Personal Allowance}
-Income equal to standard personal allowance is not taxed: --
+Income equal to the standard personal allowance is not taxed: --
 
 <<>>=
 incometax(12570)
 @
 
-Specifying standard personal allowance explicitly is identical: --
+Specifying the standard personal allowance explicitly is identical: --
 
 <<>>=
 all.equal(incometax(12570), incometax(12570, 12570))

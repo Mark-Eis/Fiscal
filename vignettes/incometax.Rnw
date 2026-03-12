@@ -31,6 +31,15 @@ options(width = 80, continue = "  ",
         try.outFile = stdout())
 @
 
+<<echo=FALSE, results=hide>>=
+prettyL <- function(x) paste0("\U00A3", prettyNum(x, ","))
+std_allow <- tax_opts()$std_allow
+allow_upper <- tax_opts()$allow_upper
+basicband <- tax_opts()$band[1]
+higherband <- tax_opts()$band[2]
+sumband <- sum(tax_opts()$band)
+@
+
 \tableofcontents 
 
 \section{Introduction}
@@ -53,29 +62,34 @@ the basic rate band by an amount up to and including the upper limit of the high
 basic and higher rate bands attracts \emph{additional rate} income tax.
 
 The standard Personal Allowance is the amount of taxable income on which there is no tax liability,
-currently \pounds12,570. The personal allowance goes down by \pounds1 for every \pounds2 that
-\href{https://www.gov.uk/guidance/adjusted-net-income}{adjusted net income} is above an upper
-threshold, currently \pounds100,000. This means the personal allowance is zero if taxable income is
-\pounds125,140 or above.
+currently \Sexpr{prettyL(std_allow)}. The personal allowance goes down by \pounds1 for every \pounds2
+that \href{https://www.gov.uk/guidance/adjusted-net-income}{adjusted net income} is above an upper
+threshold, currently \Sexpr{prettyL(allow_upper)}. This means the personal allowance is zero if taxable
+income is \Sexpr{prettyL(allow_upper + std_allow * 2)} or above.
 
 Hence currently in 2026: --
 \itemize{
-  \item taxable income exceeding the standard personal allowance (in the simplest case \pounds12,570) by
-    an amount up to \pounds37,700 attracts 20\% basic rate income tax\footnote{In practice, an additional
-    	\pounds9 income is allowed before basic and higher tax is applied.};
-  \item taxable income up to \pounds100,000 overall and exceeding the standard personal allowance by
-    amounts between \pounds37,701 and \pounds87,430 attracts 40\% higher rate income tax;
+  \item taxable income exceeding the standard personal allowance (in the simplest case
+    \Sexpr{prettyL(std_allow)}) by an amount up to \Sexpr{prettyL(basicband)} attracts 20\% basic rate
+    income tax\footnote{In practice, an additional \pounds9 income is allowed before basic and higher 
+    	rate tax is applied.};
+  \item taxable income up to \Sexpr{prettyL(allow_upper)} overall and exceeding the standard personal
+    allowance by amounts between \Sexpr{prettyL(basicband + 1)} and \Sexpr{prettyL(allow_upper - std_allow)}
+    attracts 40\% higher rate income tax;
   \item taxable income above \pounds100,000 overall exceeding the reduced personal allowance by amounts
-    between \pounds87,430 and \pounds125,140 attracts 40\% higher rate income tax; and
-  \item taxable income above \pounds125,140 has no personal allowance and attracts 45\% additional rate
-    income tax\footnote{In practice, an additional \pounds5 income is allowed before additional rate tax is applied.}.
+    between \Sexpr{prettyL(allow_upper - std_allow)} and \Sexpr{prettyL(sumband)} attracts 40\% higher rate
+    income tax; and
+  \item taxable income above \Sexpr{prettyL(sumband)} has no personal allowance and attracts 45\% additional
+    rate income tax\footnote{In practice, an additional \pounds6 income is allowed before additional rate
+    tax 	is applied, but this additional \pounds6 is itself decreased by \pounds1 for every further \pounds2
+    	increase in income.}.
 }  
 
 See GOV.UK 
 \href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands}.
 
 \section{Income up to the Personal Allowance}
-Income equal to the standard personal allowance is not taxed: --
+Income less or equal to the standard personal allowance of \Sexpr{prettyL(std_allow)} is not taxed: --
 
 <<>>=
 incometax(12570)
@@ -103,7 +117,7 @@ allowance (plus \pounds9): --
 incometax(12570 + 1009)
 @
 
-...or above a specified personal allowance: --
+...or above a specified personal allowance of say \pounds5,000 or \pounds0: --
 
 <<>>=
 incometax(5000 + 1009, 5000)
@@ -111,7 +125,7 @@ incometax(5000 + 1009, 5000)
 incometax(1009, 0)
 @
 
-...up to the base rate band limit of \pounds37,700: --
+...up to the base rate band limit of \Sexpr{prettyL(basicband)}: --
 
 <<>>=
 incometax(12570 + 37709)
@@ -134,14 +148,14 @@ incometax(37700 + 1009, 0)
 
 \section{Income Above the Personal Allowance Limit}
 The standard personal allowance is applicable to an upper limit
-of \pounds100,000: --
+of \Sexpr{prettyL(allow_upper)}: --
 
 <<>>=
 incometax(100000)
 @
 
-For every \pounds2 of income above this  \pounds100,000 limit, the
-personal allowance decreases by~\pounds1: --
+For every \pounds2 of income above this \Sexpr{prettyL(allow_upper)} limit,
+the personal allowance decreases by~\pounds1: --
 
 <<>>=
 incometax(100000 + 4000)
@@ -149,7 +163,7 @@ incometax(100000 + 4000)
 incometax(100000 + 20000)
 @
 
-Hence, at an income of \pounds125,140, personal allowance is zero: --
+Hence, at an income of \Sexpr{prettyL(allow_upper + std_allow * 2)}, personal allowance is zero: --
 
 <<>>=
 incometax(125140)
@@ -157,15 +171,16 @@ incometax(125140)
 
 \section{Income Above the Higher Rate Band}
 
-Above an income of \pounds125,145 i.e., above the higher rate band
-plus \pounds5, additional rate tax is applied: --
+Above an income of \Sexpr{(prettyL(sumband + 6))} i.e., above the
+sum of the basic and higher rate bands, \Sexpr{prettyL(sumband)},
+plus \pounds6, additional rate tax is applied: --
 
 <<>>=
 incometax(125145)
 
 incometax(125146)
 
-incometax(125140 + 10000)
+incometax(125139 + 10000)
 @
 
 \end{document}

@@ -8,11 +8,10 @@ function(income, allowance = NULL, opts = tax_opts()) {
         allowance <- allowance %||% pers_allow(income, opts)
         taxable <- max(income - allowance, 0)
         offset <- if (allowance < 0) 0 else 9
-        taxablef <- max(taxable - max(min(((sum(band) - income) / 2 + 9), offset), 0), 0) # adjustment
-        if (taxablef >= band[1] + band[2]) {
-            band[2] <- band[2] - 1
+        taxablef <- max(taxable - max(min(((sum(band) + 1 - income) / 2 + 9), offset), 0), 0) # adjustment
+        if (taxablef > band[1] + band[2])
             c(band[1] * rate[1], band[2] * rate[2], (taxablef - band[1] - band[2]) * rate[3])
-        } else
+        else
             if (taxablef > band[1])
                 c(band[1] * rate[1], (taxablef - band[1]) * rate[2], 0)
             else

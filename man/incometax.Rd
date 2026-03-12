@@ -49,8 +49,8 @@ Hence currently in 2026: --
   \item taxable income up to £100,000 overall and exceeding the standard personal allowance by
     amounts between £37,701 and £87,430 attracts 40\% higher rate income tax;
   \item taxable income above £100,000 overall exceeding the reduced personal allowance by amounts
-    between £87,430 and £125,140 attracts 40\% higher rate income tax; and
-  \item taxable income above £125,140 has no personal allowance and attracts 45\% additional rate
+    between £87,430 and £125,139 attracts 40\% higher rate income tax; and
+  \item taxable income above £125,139 has no personal allowance and attracts 45\% additional rate
     income tax.
 }  
 See GOV.UK 

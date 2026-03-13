@@ -10,7 +10,7 @@ Options for tax bands, rates and allowances with default values for 2025-2027 ta
 }
 \usage{
 tax_opts(
-  band = c(37700L, 87440L),
+  band = c(37700L, 87439L),
   rate = c(0.2, 0.4, 0.45),
   std_allow = 12570L,
   allow_upper = 100000L

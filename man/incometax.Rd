@@ -106,47 +106,37 @@ Other income_tax:
 }
 \concept{income_tax}
 \examples{
-## Income equal to standard personal allowance
+## Income equal to the standard personal allowance
 incometax(12570)
 
-## Specifying standard personal allowance explicitly
-all.equal(incometax(12570), incometax(12570, 12570))
+## Base rate tax applied to an income above
+## the standard personal allowance
+incometax(13579)
 
-## In practice, £9 is added to personal allowance
-## before tax applied
-incometax(12579)
+## Specify a personal allowance explicitly
+incometax(12579, 2570)
 
-all.equal(incometax(12579), incometax(12579, 12570))
-
-## Base rate tax applied to income above personal allowance
-incometax(12570 + 1009)
-
-## ...up to base rate band limit
-incometax(12570 + 37709)
-
-## Higher rate applied to income above base rate band
+## Higher rate applied to income above the standard
+## personal allowance plus the the base rate band
 incometax(12570 + 37700 + 1009)
 
-## ...up to personal allowance limit of £100,000
+## Personal allowance upper limit of £100,000
 incometax(100000)
 
 ## For every £2 of income above this limit,
 ## personal allowance decreases by £1
-incometax(100000 + 4000)
+incometax(110000)
 
-incometax(100000 + 20000)
-
-## Hence, at an income of £125,140,
+## At an income of £125,140,
 ## personal allowance is zero
 incometax(125140)
 
-## Above an income of £125,145
-## additional rate tax is applied
-incometax(125145)
+## Additional rate tax is applied
+## to income above £125,139
+incometax(135139)
 
-incometax(125146)
-
-incometax(125140 + 10000)
+## Specify a pay adjustment
+incometax(125139, -10000)
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the

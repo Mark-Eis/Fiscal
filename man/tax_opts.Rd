@@ -32,14 +32,14 @@ tax_opts(
 Tax is paid on the amount of taxable income remaining after the Personal Allowance has been
 deducted, allocated among the \emph{basic}, \emph{higher} and \emph{additional} rates.
 
-Earnings exceeding the personal allowance by an amount up to and including the value of
-\code{band[1]} attract \emph{basic rate} income tax; earnings exceeding the personal allowance plus
+Income exceeding the personal allowance by an amount up to and including the value of
+\code{band[1]} attract \emph{basic rate} income tax; income exceeding the personal allowance plus
 \code{band[1]} by an amount up to and including the value of \code{band[2]} attract
-\emph{higher rate} income tax; and earnings exceeding the personal allowance plus the value of
+\emph{higher rate} income tax; and income exceeding the personal allowance plus the value of
 \code{\link{sum}(band)} attract \emph{additional rate} income tax. See \code{\link{incometax}()}
 \emph{Details} for further information.
 
-Argument \code{allow_upper} is an earnings threshold above which the personal allowance goes down by
+Argument \code{allow_upper} is an income threshold above which the personal allowance goes down by
 £1 for every £2 taxable income exceeds it, see GOV.UK
 \href{https://www.gov.uk/income-tax-rates}{Income Tax rates and Personal Allowances}.
 
@@ -80,7 +80,7 @@ with(tax_opts(), std_allow)
 ## standard allowance is reduced by £1
 with(tax_opts(), allow_upper)
 
-## Typical earnings threshold for higher rate income tax
+## Typical income threshold for higher rate income tax
 with(tax_opts(), sum(std_allow, band[1]))
 
 ## Amount over personal allowance at which

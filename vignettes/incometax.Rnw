@@ -138,7 +138,9 @@ incometax(37709, 0)
 @
 
 \section{Income Above the Base Rate Band}
-Higher rate income tax is applied to income above the base rate band:~--
+Higher rate income tax is applied to income above the base rate band, at both
+the standard personal allowance and a specified personal allowance e.g.,
+\pounds5,000 or \pounds0:~--
 
 <<>>=
 incometax(12570 + 37700 + 1009)
@@ -161,7 +163,10 @@ the personal allowance decreases by~\pounds1:~--
 
 <<>>=
 incometax(100000 + 4000)
+@
+\pagebreak
 
+<<>>=
 incometax(100000 + 20000)
 @
 

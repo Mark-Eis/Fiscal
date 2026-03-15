@@ -37,21 +37,25 @@ the basic rate band by an amount up to and including the upper limit of the high
 basic and higher rate bands attracts \emph{additional rate} income tax.
 
 The standard Personal Allowance is the amount of taxable income on which there is no tax liability,
-currently £12,570. The personal allowance goes down by £1 for every £2 that
+currently £\Sexpr[stage=build]{prettyNum(Fiscal::tax_opts()$std_allow, ",")}. The personal allowance
+goes down by £1 for every £2 that
 \href{https://www.gov.uk/guidance/adjusted-net-income}{adjusted net income} is above an upper
-threshold, currently £100,000. This means the personal allowance is zero if taxable income is
-£125,140 or above.
+threshold, currently £\Sexpr[stage=build]{prettyNum(Fiscal::tax_opts()$allow_upper, ",")}. This means
+the personal allowance is zero if taxable income is
+£\Sexpr[stage=build]{prettyNum(with(Fiscal::tax_opts(), (allow_upper + 2 * std_allow)), ",")}
+or above.
 
 Hence currently in 2026: --
 \itemize{
-  \item taxable income exceeding the standard personal allowance (in the simplest case £12,570) by
-    an amount up to £37,700 attracts 20\% basic rate income tax;
-  \item taxable income up to £100,000 overall and exceeding the standard personal allowance by
-    amounts between £37,701 and £87,430 attracts 40\% higher rate income tax;
-  \item taxable income above £100,000 overall exceeding the reduced personal allowance by amounts
-    between £87,430 and £125,139 attracts 40\% higher rate income tax; and
-  \item taxable income above £125,139 has no personal allowance and attracts 45\% additional rate
-    income tax.
+  \item taxable income after allowances (in the standard case £\Sexpr[stage=build]{prettyNum(Fiscal::tax_opts()$std_allow, ",")})
+    up to £\Sexpr[stage=build]{prettyNum(Fiscal::tax_opts()$band[1], ",")} attracts 20\% basic rate income tax;
+  \item taxable income after allowances between £\Sexpr[stage=build]{prettyNum(Fiscal::tax_opts()$band[1] + 1, ",")} and
+    £\Sexpr[stage=build]{prettyNum(sum(Fiscal::tax_opts()$band), ",")} attracts 40\% higher rate income tax---noting
+    that the standard personal allowance is reduced above
+    £\Sexpr[stage=build]{prettyNum(Fiscal::tax_opts()$allow_upper, ",")}; and
+  \item taxable income after allowances above £\Sexpr[stage=build]{prettyNum(sum(Fiscal::tax_opts()$band), ",")}
+    attracts 45\% additional rate income tax---noting there is no standard personal allowance at or above
+    £\Sexpr[stage=build]{prettyNum(with(Fiscal::tax_opts(), allow_upper + 2 * std_allow), ",")}.
 }  
 See GOV.UK 
 \href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands} and vignette 

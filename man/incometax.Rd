@@ -76,7 +76,7 @@ Argument \code{opts} specifying values for tax bands, rates and allowances must 
 \value{
 \code{incometax()} returns an object of class \code{"incometax"} comprising a named \code{numeric}
 vector of length three, with names derived from the three tax rates provided using
-\code{\link{tax_opts}()} i.e., \code{c(20\%, 40\%, 45\%)} for the 2025-2027 tax years; and
+\code{\link{tax_opts}()} i.e., \code{c(\taxoptpc{rate[1]}\%, \taxoptpc{rate[2]}\%, \taxoptpc{rate[3]}\%)} for the 2025-2027 tax years; and
 \code{numeric} attributes \code{"allowance"} and \code{"taxable"}, representing the personal
 allowance and tableable pay respectively.
 }

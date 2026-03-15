@@ -13,16 +13,15 @@ pers_allow(adj_net_income, opts = tax_opts())
   
   \item{opts}{options, as created by \code{\link{tax_opts}()}, see details.}
 }
+\newcommand{\taxoptL}{£\Sexpr[stage=build]{prettyNum(with(Fiscal::tax_opts(), #1), ",")}}
 \details{
 The standard Personal Allowance is the amount of taxable income on which there is no tax liability,
-currently £\Sexpr[stage=build]{prettyNum(Fiscal::tax_opts()$std_allow, ",")}.
+currently \taxoptL{std_allow}.
 
 The personal allowance goes down by £1 for every £2 that
 \href{https://www.gov.uk/guidance/adjusted-net-income}{adjusted net income} is above an upper
-threshold, currently £\Sexpr[stage=build]{prettyNum(Fiscal::tax_opts()$allow_upper, ",")}. This means
-the personal allowance is zero if taxable income is
-£\Sexpr[stage=build]{prettyNum(Fiscal::tax_opts()$allow_upper + 2 * Fiscal::tax_opts()$std_allow, ",")}
-or above.
+threshold, currently \taxoptL{allow_upper}. This means the personal allowance is zero if taxable
+income is \taxoptL{allow_upper + 2 * std_allow} or above.
 
 See GOV.UK \href{https://www.gov.uk/income-tax-rates}{Income Tax rates and Personal Allowances}.
 }

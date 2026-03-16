@@ -18,10 +18,10 @@ pers_allow(adj_net_income, opts = tax_opts())
 The standard Personal Allowance is the amount of taxable income on which there is no tax liability,
 currently \taxoptL{std_allow}.
 
-The personal allowance goes down by £1 for every £2 that
+The standard Personal Allowance  goes down by £1 for every £2 that
 \href{https://www.gov.uk/guidance/adjusted-net-income}{adjusted net income} is above an upper
-threshold, currently \taxoptL{allow_upper}. This means the personal allowance is zero if taxable
-income is \taxoptL{allow_upper + 2 * std_allow} or above.
+threshold, currently \taxoptL{allow_upper} and hence falls to zero if taxable income is
+\taxoptL{allow_upper + 2 * std_allow} or above.
 
 See GOV.UK \href{https://www.gov.uk/income-tax-rates}{Income Tax rates and Personal Allowances}.
 }
@@ -36,11 +36,6 @@ A \code{numeric} vector representing values of the Personal Allowance.
 \author{
 \packageAuthor{Fiscal}
 }
-% \note{
-%%  ~~further notes~~
-% }
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 
@@ -52,19 +47,16 @@ Other income_tax:
 \concept{income_tax}
 \examples{
 
-## Create an ascending sequence of possible taxable incomes
-newseq <- with(tax_opts(), round(exp(seq(log(allow_upper), log(std_allow * 2 + allow_upper), length.out = 10)), 0))
+## Create a named ascending sequence of possible taxable incomes
+## starting at upper threshold of the standard Personal Allowance
+(newseq <-
+    with(tax_opts(), seq(allow_upper, std_allow * 2 + allow_upper, length.out = 11)) |>
+    setNames(nm = _)
+)
 
 ## Calculate personal allowances on the basis of this sequence
-pers_allow(newseq) |> setNames(newseq)
+pers_allow(newseq)
 
+## Result is as expected
+all.equal(pers_allow(newseq), with(tax_opts(), std_allow - (newseq - allow_upper) / 2))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory (show via RShowDoc("KEYWORDS")):
-% \keyword{ ~kwd1 }
-% \keyword{ ~kwd2 }
-% Use only one keyword per line.
-% For non-standard keywords, use \concept instead of \keyword:
-% \concept{ ~cpt1 }
-% \concept{ ~cpt2 }
-% Use only one concept per line.

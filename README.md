@@ -5,7 +5,13 @@ Income tax calculations for England, Northern Ireland and Wales. Estimate annual
 
 ## Installation
 
-You can install the latest development version of Fiscal
+You can install the currently-released version from CRAN with this R command:
+
+``` r
+install.packages("Fiscal")
+```
+
+Alternatively, you can install the latest development version of Fiscal
 from [GitHub](https://github.com/) with:
       
 ``` r

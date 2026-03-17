@@ -23,6 +23,9 @@ GOV.UK: --
 
 \href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years}
 }
+\section{Package Source}{
+\href{https://github.com/Mark-Eis/Fiscal}{Source code on GitHub}.
+}
 \section{Disclaimer}{
 While every effort is made to ensure this package functions as expected, the author accepts no responsibility for the consequences of errors.
 }
@@ -30,7 +33,7 @@ While every effort is made to ensure this package functions as expected, the aut
 
 %% Uncomment below to imitate parts of library(help = Fiscal)
 %\section{The \file{DESCRIPTION} File}{\packageDESCRIPTION{Fiscal}}
-%\section{Documentation Index}{\packageIndices{Fiscal}}
+\section{Documentation Index}{\packageIndices{Fiscal}}
 
 % \seealso{
 %%  ~~ Optional links to other man pages, e.g. ~~

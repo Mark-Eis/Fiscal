@@ -12,7 +12,7 @@
 
 * Improved `incometax()` documentation including links to {base} generic `format()` and `print()` functions (#11).
 
-* Simplified `incometax()` examples and vignette created for more complex ones (#7).
+* Simplified `incometax()` examples and vignette "incometax" created for more complex ones (#7).
 
 # Fiscal 1.0.0 (2026-03-09)
 

@@ -1,4 +1,4 @@
-# Fiscal 1.0.1 (2026-03-18)
+# Fiscal 1.0.1 (2026-03-17)
 
 * Revised `format.incometax()` headings to be more consistent with GOV.UK website (#18).
 

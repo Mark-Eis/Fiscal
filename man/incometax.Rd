@@ -34,11 +34,10 @@ Wales, and is intended to replicate the estimates of GOV.UK
 Tax is paid on the amount of taxable income remaining after the
 \href{https://www.gov.uk/income-tax-rates}{Personal Allowance} has been deducted, and is allocated
 among the \emph{basic}, \emph{higher} and \emph{additional} rates. After deduction of the Personal
-Allowance, if any (see below): income up to and including the upper limit of the basic rate band,
-attracts \emph{basic rate} income tax; income exceeding the basic rate band by an amount up to and
-including the upper limit of the higher rate band, attracts \emph{higher rate} income tax; and
-income exceeding the sum of the basic and higher rate bands attracts \emph{additional rate} income
-tax.
+Allowance, if any (see below): income up to and including the upper limit of the basic rate band
+attracts \emph{basic rate} tax; income exceeding the basic rate band by an amount up to and 
+including the upper limit of the higher rate band attracts \emph{higher rate} tax; and income
+exceeding the sum of the basic and higher rate bands attracts \emph{additional rate} tax.
 
 The \href{https://www.gov.uk/income-tax-rates}{standard Personal Allowance} is the amount of taxable
 income on which there is no tax liability, currently \taxoptL{std_allow}. The Personal Allowance

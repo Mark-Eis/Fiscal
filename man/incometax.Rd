@@ -33,12 +33,12 @@ Wales, and is intended to replicate the estimates of GOV.UK
 
 Tax is paid on the amount of taxable income remaining after the
 \href{https://www.gov.uk/income-tax-rates}{Personal Allowance} has been deducted, and is allocated
-among the \emph{basic}, \emph{higher} and \emph{additional} rates. Income exceeding the Personal
-Allowance by an amount up to and including the upper limit of the basic rate band attracts
-\emph{basic rate} income tax; income exceeding the Personal Allowance plus the basic rate band by
-an amount up to and including the upper limit of the higher rate band attracts \emph{higher rate}
-income tax; and income exceeding the Personal Allowance plus the sum of the basic and higher rate
-bands attracts \emph{additional rate} income tax.
+among the \emph{basic}, \emph{higher} and \emph{additional} rates. After deduction of the Personal
+Allowance, if any (see below): income up to and including the upper limit of the basic rate band,
+attracts \emph{basic rate} income tax; income exceeding the basic rate band by an amount up to and
+including the upper limit of the higher rate band, attracts \emph{higher rate} income tax; and
+income exceeding the sum of the basic and higher rate bands attracts \emph{additional rate} income
+tax.
 
 The \href{https://www.gov.uk/income-tax-rates}{standard Personal Allowance} is the amount of taxable
 income on which there is no tax liability, currently \taxoptL{std_allow}. The Personal Allowance
@@ -60,8 +60,7 @@ Hence currently in 2026: --
     \taxoptL{allow_upper + 2 * std_allow}.
 }
 See GOV.UK 
-\href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands} and vignette 
-\href{../doc/incometax.pdf}{PAYE income tax calculator for England, Northern Ireland and Wales} for examples.
+\href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands}.
 
 Argument \code{allowance} may be used to specify a bespoke Personal Allowance, or if negative, a
 \href{https://www.gov.uk/tax-codes/k-in-your-tax-code}{K code pay adjustment}; otherwise, its
@@ -76,7 +75,7 @@ Argument \code{opts} specifying values for tax bands, rates and allowances must 
 \value{
 \code{incometax()} returns an object of class \code{"incometax"} comprising a named \code{numeric}
 vector of length three, with names derived from the three tax rates provided using
-\code{\link{tax_opts}()} i.e., \code{c(\taxoptpc{rate[1]}\%, \taxoptpc{rate[2]}\%, \taxoptpc{rate[3]}\%)} for the 2025-2027 tax years; and
+\code{\link{tax_opts}()} i.e., \code{\taxoptpc{rate[1]}\%, \taxoptpc{rate[2]}\% and \taxoptpc{rate[3]}\%} for the 2025-2027 tax years; and
 \code{numeric} attributes \code{"allowance"} and \code{"taxable"}, representing the personal
 allowance and tableable pay respectively.
 }
@@ -111,48 +110,40 @@ Other income_tax:
 \code{\link{allowance}()},
 \code{\link{pers_allow}()},
 \code{\link{tax_opts}()}
+
+Vignette: \href{../doc/incometax.pdf}{PAYE income tax calculator for England, Northern Ireland and Wales}.
 }
 \concept{income_tax}
 \examples{
-## Income equal to the standard Personal Allowance
+## Up to the standard Personal Allowance,
+## income attracts no tax 
 incometax(12570)
 
-## Base rate tax applied to an income above
-## the standard Personal Allowance
-incometax(13579)
+## After the standard Personal Allowance,
+## income attracts base rate tax
+incometax(12570 + 1009)
 
-## Specify a Personal Allowance explicitly
-incometax(12579, 2570)
-
-## Higher rate applied to income above the standard
-## Personal Allowance plus the the base rate band
+## After the standard Personal Allowance, income above
+## the the base rate band attracts higher rate tax
 incometax(12570 + 37700 + 1009)
 
-## Personal allowance upper limit of £100,000
-incometax(100000)
+## Income above the base and higher rate
+## bands attracts additional rate tax
+incometax(37700 + 87439 + 10000)
 
-## For every £2 of income above this limit,
-## Personal Allowance decreases by £1
-incometax(110000)
+## For every £2 of income above its £100,000 upper limit,
+## the standard Personal Allowance decreases by £1
+incometax(100000 + 20000)
 
-## At an income of £125,140,
+## At an income of £125,140 or above,
 ## Personal Allowance is zero
 incometax(125140)
 
-## Additional rate tax is applied
-## to income above £125,139
-incometax(135139)
+## Specify a bespoke Personal Allowance
+## explicitly using the second argument
+incometax(6570 + 10009, 6570)
 
-## Specify a pay adjustment
+## Specify a pay adjustment using
+## a negative second argument
 incometax(125139, -10000)
 }
-
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory (show via RShowDoc("KEYWORDS")):
-% \keyword{ ~kwd1 }
-% \keyword{ ~kwd2 }
-% Use only one keyword per line.
-% For non-standard keywords, use \concept instead of \keyword:
-% \concept{ ~cpt1 }
-% \concept{ ~cpt2 }
-% Use only one concept per line.

@@ -123,7 +123,8 @@ allowance (plus \pounds9):~--
 incometax(12570 + 9 + 1000)
 @
 
-\ldots or above a specified Personal Allowance of say \pounds5,000 or \pounds0:~--
+\ldots or above a bespoke Personal Allowance of say \pounds5,000 or \pounds0 specified using the
+\code{allowance} argument:~--
 
 <<>>=
 incometax(5000 + 9 + 1000, 5000)
@@ -143,7 +144,7 @@ incometax(9 + 37700, 0)
 
 \section{Income Above the Base Rate Band}
 Higher rate income tax is applied to income above the base rate band, at
-the standard Personal Allowance or a specified Personal Allowance e.g.,
+the standard Personal Allowance or a bespoke Personal Allowance e.g.,
 \pounds5,000 or \pounds0 (again, plus \pounds9):~--
 
 <<>>=
@@ -214,13 +215,13 @@ incometax(125139, -10000)
 @
 
 Although in this last example the result is equivalent to that obtained by adding the value of the
-pay adjustment to argument \code{income} (see the previous example):~--
+pay adjustment to argument \code{income} (viz. the previous example):~--
 
 <<>>=
 all.equal(incometax(125139, -10000), incometax(125139 + 10000), check.attributes = FALSE)
 @
 
-\ldots that may not always be
+\ldots that equivalence may not always be
 the~case:~--
 
 <<>>=

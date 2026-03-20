@@ -120,38 +120,38 @@ Base rate tax is applied to income above the standard personal
 allowance (plus \pounds9):~--
 
 <<>>=
-incometax(12570 + 1009)
+incometax(12570 + 9 + 1000)
 @
 
 ...or above a specified Personal Allowance of say \pounds5,000 or \pounds0:~--
 
 <<>>=
-incometax(5000 + 1009, 5000)
+incometax(5000 + 9 + 1000, 5000)
 
-incometax(1009, 0)
+incometax(9 + 1000, 0)
 @
 
 \pagebreak ...up to the base rate band limit of \Sexpr{prettyL(basicband)}:~--
 
 <<>>=
-incometax(12570 + 37709)
+incometax(12570 + 9 + 37700)
 
-incometax(5000 + 37709, 5000)
+incometax(5000 + 9 + 37700, 5000)
 
-incometax(37709, 0)
+incometax(9 + 37700, 0)
 @
 
 \section{Income Above the Base Rate Band}
-Higher rate income tax is applied to income above the base rate band, at both
-the standard Personal Allowance and a specified Personal Allowance e.g.,
-\pounds5,000 or \pounds0:~--
+Higher rate income tax is applied to income above the base rate band, at
+the standard Personal Allowance or a specified Personal Allowance e.g.,
+\pounds5,000 or \pounds0 (again, plus \pounds9):~--
 
 <<>>=
-incometax(12570 + 37700 + 1009)
+incometax(12570 + 9 + 37700 + 1000)
 
-incometax(5000 + 37700 + 1009, 5000)
+incometax(5000 + 9 + 37700 + 1000, 5000)
 
-incometax(37700 + 1009, 0)
+incometax(9 + 37700 + 1000, 0)
 @
 
 \section{Income Above the Personal Allowance Limit}
@@ -215,8 +215,9 @@ incometax(125139, -10000)
 all.equal(incometax(125139, -10000), incometax(125139 + 10000), check.attributes = FALSE)
 @
 
-Although in the previous example the effect of the pay adjustment is identical to adding the
-same amount to argument \code{income}, that isn't always the case:~--
+Although in this last example the result is identical to that obtained by adding the value of the
+pay adjustment to argument \code{income} (see the previous example), that may not always be
+the~case:~--
 
 <<>>=
 incometax(100000, -1000)

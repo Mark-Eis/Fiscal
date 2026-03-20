@@ -145,10 +145,10 @@ incometax(37700 + 87439 + 10000)
 ##  –  §  –
 
 ## Specifying a bespoke Personal Allowance
-## explicitly using the second argument
+## explicitly using the `allowance` argument
 incometax(6570 + 9 + 10000, 6570)
 
 ## Specifying a pay adjustment using
-## a negative second argument
+## a negative `allowance` argument
 incometax(125139, -10000)
 }

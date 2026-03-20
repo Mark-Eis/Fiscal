@@ -138,7 +138,7 @@ incometax(100000 + 20000)
 ## there is no standard Personal Allowance
 incometax(125140)
 
-## Income above the base and higher rate
+## Income above the base plus higher rate
 ## bands attracts additional rate tax
 incometax(37700 + 87439 + 10000)
 
@@ -146,7 +146,7 @@ incometax(37700 + 87439 + 10000)
 
 ## Specifying a bespoke Personal Allowance
 ## explicitly using the second argument
-incometax(6570 + 10009, 6570)
+incometax(6570 + 9 + 10000, 6570)
 
 ## Specifying a pay adjustment using
 ## a negative second argument

@@ -123,7 +123,7 @@ allowance (plus \pounds9):~--
 incometax(12570 + 9 + 1000)
 @
 
-...or above a specified Personal Allowance of say \pounds5,000 or \pounds0:~--
+\ldots or above a specified Personal Allowance of say \pounds5,000 or \pounds0:~--
 
 <<>>=
 incometax(5000 + 9 + 1000, 5000)
@@ -131,7 +131,7 @@ incometax(5000 + 9 + 1000, 5000)
 incometax(9 + 1000, 0)
 @
 
-\pagebreak ...up to the base rate band limit of \Sexpr{prettyL(basicband)}:~--
+\pagebreak \ldots up to the base rate band limit of \Sexpr{prettyL(basicband)}:~--
 
 <<>>=
 incometax(12570 + 9 + 37700)
@@ -211,12 +211,16 @@ using a negative value for argument \code{allowance}:~--
 
 <<>>=
 incometax(125139, -10000)
+@
 
+Although in this last example the result is equivalent to that obtained by adding the value of the
+pay adjustment to argument \code{income} (see the previous example):~--
+
+<<>>=
 all.equal(incometax(125139, -10000), incometax(125139 + 10000), check.attributes = FALSE)
 @
 
-Although in this last example the result is identical to that obtained by adding the value of the
-pay adjustment to argument \code{income} (see the previous example), that may not always be
+\ldots that may not always be
 the~case:~--
 
 <<>>=

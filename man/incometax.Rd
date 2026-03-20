@@ -74,9 +74,10 @@ Argument \code{opts} specifying values for tax bands, rates and allowances must 
 \value{
 \code{incometax()} returns an object of class \code{"incometax"} comprising a named \code{numeric}
 vector of length three, with names derived from the three tax rates provided using
-\code{\link{tax_opts}()} i.e., \code{\taxoptpc{rate[1]}\%, \taxoptpc{rate[2]}\% and \taxoptpc{rate[3]}\%} for the 2025-2027 tax years; and
-\code{numeric} attributes \code{"allowance"} and \code{"taxable"}, representing the personal
-allowance and tableable pay respectively.
+\code{\link{tax_opts}()} i.e., \code{\taxoptpc{rate[1]}\%}, \code{\taxoptpc{rate[2]}\%} and
+\code{\taxoptpc{rate[3]}\%} for the 2025-2027 tax years; and \code{numeric} attributes
+\code{"allowance"} and \code{"taxable"}, representing the personal allowance and tableable pay
+respectively.
 }
 \references{
 GOV.UK: --
@@ -118,31 +119,36 @@ Vignette: \href{../doc/incometax.pdf}{PAYE income tax calculator for England, No
 ## income attracts no tax 
 incometax(12570)
 
+## After the standard Personal Allowance
+## (and a further £9), income
+## attracts base rate tax
+incometax(12570 + 9 + 1000)
+
 ## After the standard Personal Allowance,
-## income attracts base rate tax
-incometax(12570 + 1009)
-
-## After the standard Personal Allowance, income above
-## the the base rate band attracts higher rate tax
-incometax(12570 + 37700 + 1009)
-
-## Income above the base and higher rate
-## bands attracts additional rate tax
-incometax(37700 + 87439 + 10000)
+## (and a further £9), income above
+## the base rate band attracts
+## higher rate tax
+incometax(12570 + 9 + 37700 + 1000)
 
 ## For every £2 of income above its £100,000 upper limit,
 ## the standard Personal Allowance decreases by £1
 incometax(100000 + 20000)
 
 ## At an income of £125,140 or above,
-## Personal Allowance is zero
+## there is no standard Personal Allowance
 incometax(125140)
 
-## Specify a bespoke Personal Allowance
+## Income above the base and higher rate
+## bands attracts additional rate tax
+incometax(37700 + 87439 + 10000)
+
+##  –  §  –
+
+## Specifying a bespoke Personal Allowance
 ## explicitly using the second argument
 incometax(6570 + 10009, 6570)
 
-## Specify a pay adjustment using
+## Specifying a pay adjustment using
 ## a negative second argument
 incometax(125139, -10000)
 }

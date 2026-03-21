@@ -9,12 +9,14 @@ Personal tax allowance adjusted to recoup a tax deficit
 Calculates the personal tax allowance adjusted in order to recoup a given amount of tax.
 }
 \usage{
-allowance(taxable, deficit = NULL, opts = tax_opts())
+allowance(taxable, deficit = NULL, round10 = TRUE, opts = tax_opts())
 }
 \arguments{
   \item{taxable}{\code{numeric}, annual taxable income.}
   
   \item{deficit}{\code{numeric}, tax deficit to recoup, see details.}
+
+  \item{round10}{\code{logical}, whether or not to round return value to nearest £10; default \code{TRUE}.}
 
   \item{opts}{options, as created by \code{\link{tax_opts}()}, see details.}
 }
@@ -26,6 +28,9 @@ referred to as a \emph{Pay Adjustment}.
 
 Argument \code{deficit} represents the total amount of tax to recoup, including the usual amount
 plus any additional outstanding deficit.
+
+Argument \code{round10}, if \code{TRUE}, the default, causes the return value to be rounded to the nearest £10 in keeping with GOV.UK
+\href{https://www.gov.uk/tax-codes/what-your-tax-code-means}{tax codes}.
 
 Argument \code{opts} specifying values for tax bands, rates and allowances must be provided using
 \code{\link{tax_opts}()}, which by default gives GOV.UK

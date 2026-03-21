@@ -1,5 +1,5 @@
 allowance <-
-function(taxable, deficit = NULL, opts = tax_opts()) {
+function(taxable, deficit = NULL, round10 = TRUE, opts = tax_opts()) {
 	if (!inherits(opts, "tax_opts"))
 		stop("! `opts` must be created by `tax_opts()`.", call. = FALSE)
 
@@ -15,7 +15,8 @@ function(taxable, deficit = NULL, opts = tax_opts()) {
 				else
 					taxable - deficit / rate[1]
 			offset <- if (allow < 0) 0 else 9
-			allow - max(min(((sum(band) + 1 - taxable) / 2 + 9), offset), 0)		# adjustment as for incometax()		
+			allow <- allow - max(min(((sum(band) + 1 - taxable) / 2 + 9), offset), 0)		# adjustment as for incometax()		
+            if (round10) round(allow, -1) else allow 
 		}
 	)
 }

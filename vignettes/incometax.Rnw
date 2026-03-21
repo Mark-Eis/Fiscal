@@ -230,4 +230,27 @@ incometax(100000, -1000)
 incometax(100000 + 1000)
 @
 
+\section{Calculating a Personal Allowance or Pay Adjustment}
+
+Calculate the Personal Allowance required to recoup a tax deficit of \pounds600 at a salary of
+\pounds10000 i.e., below the \Sexpr{prettyL(std_allow)} standard personal allowance:~--
+
+<<>>=
+allowance(10000, 600)
+@
+
+Demonstrate that the expected \pounds600 in tax is recouped:~--
+
+<<>>=
+incometax(10000, 6991)
+@
+
+%In practice this would be achieved through a tax code of 699L, see
+In practice this would be achieved through tax code \textsf{699L}, see
+\href{https://www.gov.uk/tax-codes/what-your-tax-code-means}{What your tax code means}.
+
+<<>>=
+incometax(10000, round(6991, -1))
+@
+
 \end{document}

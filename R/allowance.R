@@ -16,7 +16,7 @@ function(taxable, deficit = NULL, round10 = TRUE, opts = tax_opts()) {
 					taxable - deficit / rate[1]
 			offset <- if (allow < 0) 0 else 9
 			allow <- allow - max(min(((sum(band) + 1 - taxable) / 2 + 9), offset), 0)		# adjustment as for incometax()		
-            if (round10) round(allow, -1) else allow 
+            if (round10) floor(allow / 10) * 10 else allow 
 		}
 	)
 }

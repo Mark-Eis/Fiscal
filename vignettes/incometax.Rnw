@@ -63,39 +63,41 @@ attracts \emph{basic rate} tax; income exceeding the basic rate band by an amoun
 including the upper limit of the higher rate band attracts \emph{higher rate} tax; and income
 exceeding the sum of the basic and higher rate bands attracts \emph{additional rate} tax.
 
-The \href{https://www.gov.uk/income-tax-rates}{standard Personal Allowance} is the amount of taxable
-income on which there is no tax liability, currently \Sexpr{prettyL(std_allow)}. The personal
-allowance goes down by \pounds1 for every \pounds2 that
+The \href{https://www.gov.uk/income-tax-rates}{standard Personal Allowance} is the amount of annual
+taxable income on which there is no tax liability, currently \Sexpr{prettyL(std_allow)}. The
+standard Personal Allowance goes down by \pounds1~for every \pounds2 that
 \href{https://www.gov.uk/guidance/adjusted-net-income}{adjusted net income} is above an upper
-threshold, currently \Sexpr{prettyL(allow_upper)}. This means the Personal Allowance is zero if
-taxable income is \Sexpr{prettyL(allow_upper + std_allow * 2)} or above.
+threshold, currently \Sexpr{prettyL(allow_upper)}. This means the standard Personal Allowance is
+zero if annual taxable income is \Sexpr{prettyL(allow_upper + std_allow * 2)} or above.
 
 Hence currently in 2026:~--
 \begin{itemize}
-\item taxable income after allowances---e.g., the standard Personal Allowance of
+\item annual taxable income after allowances---e.g., the standard Personal Allowance of
   \Sexpr{prettyL(std_allow)}---up to \Sexpr{prettyL(basicband)} attracts \Sexpr{basicrate}\% basic
   rate income tax\footnote{In practice, an additional \pounds9 income is allowed before basic and
     higher rate tax is applied.};
-\item taxable income after allowances between  \Sexpr{prettyL(basicband + 1)} and \Sexpr{prettyL(sumband)}
-  attracts \Sexpr{higherrate}\% higher rate income tax---noting that the standard Personal Allowance is
-  reduced above \Sexpr{prettyL(allow_upper)};
-\item taxable income after allowances above \Sexpr{prettyL(sumband)} attracts \Sexpr{additionalrate}\%
-  additional rate income tax---noting there is no standard Personal Allowance at or above
-  \Sexpr{prettyL(allow_upper + std_allow * 2)} or above\footnote{In practice, an additional \pounds6
-    income is allowed before additional rate tax is applied; the additional \pounds6 is decreased by
-    \pounds1 for every further \pounds2 increase in income beyond \Sexpr{prettyL(sumband + 7)}.}.
+\item annual taxable income after allowances between \Sexpr{prettyL(basicband + 1)} and
+  \Sexpr{prettyL(sumband)} attracts\\ \Sexpr{higherrate}\% higher rate income tax---noting that the
+  standard Personal Allowance is reduced above \Sexpr{prettyL(allow_upper)};
+\item annual taxable income after allowances above \Sexpr{prettyL(sumband)} attracts
+  \Sexpr{additionalrate}\% additional rate income tax---noting there is no standard Personal
+  Allowance at or above \Sexpr{prettyL(allow_upper + std_allow * 2)}\footnote{In practice,
+    an additional \pounds6 income is allowed before additional rate tax is applied; the additional
+    \pounds6 is decreased by \pounds1 for every further \pounds2 increase in income beyond
+    \Sexpr{prettyL(sumband + 7)}.}.
 \end{itemize}
 
 See GOV.UK 
-\href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands}.
+\href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances: Tax rates and bands}.
 
 A bespoke Personal Allowance may be specified using \code{incometax()} argument \code{allowance}.
 When negative, this argument specifies a
 \href{https://www.gov.uk/tax-codes/k-in-your-tax-code}{K code pay adjustment}; otherwise, the
 standard Personal Allowance will be calculated using \code{pers\_allow(income, opts)}.
 
-\section{Income up to the Personal Allowance}
-Income less or equal to the standard Personal Allowance of \Sexpr{prettyL(std_allow)} is not taxed:~--
+\section{Income Up To the Personal Allowance}
+Annual income less or equal to the standard Personal Allowance of \Sexpr{prettyL(std_allow)} is not
+taxed:~--
 
 <<>>=
 incometax(12570)
@@ -107,7 +109,10 @@ Specifying the standard Personal Allowance explicitly is identical:~--
 all.equal(incometax(12570), incometax(12570, 12570))
 @
 
-\pagebreak In practice, an additional \pounds9 income is allowed before tax is applied:~--
+\pagebreak
+In practice, although shown as "Taxable Income"\footnote{For consistency with GOV.UK
+  \href{https://www.gov.uk/estimate-income-tax}{Estimate your Income Tax for the current year}}, an
+additional \pounds9 income is allowed before tax is applied:~--
 
 <<>>=
 incometax(12579)
@@ -116,48 +121,77 @@ all.equal(incometax(12579), incometax(12579, 12570))
 @
 
 \section{Income Above the Personal Allowance}
-Base rate tax is applied to income above the standard personal
-allowance (plus \pounds9):~--
-
+Annual income above the \Sexpr{prettyL(std_allow)} standard Personal Allowance plus the additional
+\pounds9 \\attracts \Sexpr{basicrate}\% basic rate tax. For instance, at an annual income of
+\Sexpr{prettyL(std_allow + 9 + 1000)}, while \\"Taxable Income" is shown as \pounds1,009, only
+\pounds1,000 is actually taxed:~--
+	
 <<>>=
-incometax(12570 + 9 + 1000)
+incometax(13579)
 @
 
-\ldots or above a bespoke Personal Allowance of say \pounds5,000 or \pounds0 specified using the
-\code{allowance} argument:~--
+At an annual income of \pounds6,009 and with a bespoke Personal Allowance specified using
+\code{allowance = 5000} as the second argument of \code{incometax()}, again while "Taxable Income"
+is shown as \pounds1,009, only \pounds1,000 is actually taxed:~--
 
 <<>>=
-incometax(5000 + 9 + 1000, 5000)
-
-incometax(9 + 1000, 0)
+incometax(6009, 5000)
 @
 
-\pagebreak \ldots up to the base rate band limit of \Sexpr{prettyL(basicband)}:~--
+\pagebreak
+With no Personal Allowance, an annual income of \pounds1,009 is taxed similarly:~--
+ 
+<<>>=
+incometax(1009, 0)
+@
+
+Annual income above the Personal Allowance attracts \Sexpr{basicrate}\% basic rate tax up to the
+basic rate band limit of \Sexpr{prettyL(basicband)}, at which basic rate tax reaches a maximum of
+\Sexpr{prettyL(basicrate * basicband / 100)}:~--
 
 <<>>=
-incometax(12570 + 9 + 37700)
+incometax(12579 + 37700)
 
-incometax(5000 + 9 + 37700, 5000)
+incometax(5009 + 37700, 5000)
 
 incometax(9 + 37700, 0)
 @
 
-\section{Income Above the Base Rate Band}
-Higher rate income tax is applied to income above the base rate band, at
-the standard Personal Allowance or a bespoke Personal Allowance e.g.,
-\pounds5,000 or \pounds0 (again, plus \pounds9):~--
+\pagebreak
+\section{Income Above the Basic Rate Band}
+Annual income above the \Sexpr{prettyL(std_allow)} standard Personal Allowance plus the
+\Sexpr{prettyL(basicband)} basic rate band and the additional \pounds9 (total
+\Sexpr{prettyL(std_allow + basicband + 9)}) attracts \Sexpr{higherrate}\% higher rate tax. For
+instance, at an annual income of \Sexpr{prettyL(std_allow + basicband + 9 + 1000)}, while "Taxable
+Income" is shown as \Sexpr{prettyL(basicband + 9 + 1000)}, only \Sexpr{prettyL(basicband + 1000)}
+is actually taxed; \Sexpr{prettyL(basicband)} at the \Sexpr{basicrate}\% basic rate and
+\pounds{1,000} at the \Sexpr{higherrate}\% higher rate:~--
 
 <<>>=
-incometax(12570 + 9 + 37700 + 1000)
-
-incometax(5000 + 9 + 37700 + 1000, 5000)
-
-incometax(9 + 37700 + 1000, 0)
+incometax(51279)
 @
 
+An annual income of \Sexpr{prettyL(5000 + basicband + 9 + 1000)} i.e., \pounds1,000 above a bespoke
+Personal Allowance of \pounds5,000 plus the \Sexpr{prettyL(basicband)} basic rate band and the
+additional \pounds9 (total \Sexpr{prettyL(5000 + basicband + 9)}) similarly attracts
+\Sexpr{higherrate}\% higher rate tax; again, while "Taxable Income" is shown as
+\Sexpr{prettyL(basicband + 9 + 1000)}, only \Sexpr{prettyL(basicband + 1000)} is actually taxed:~--
+
+<<>>=
+incometax(43709, 5000)
+@
+
+With no Personal Allowance, an annual income of \Sexpr{prettyL(basicband + 9 + 1000)} is taxed
+similarly:~--
+
+<<>>=
+incometax(38709, 0)
+@
+
+\pagebreak
 \section{Income Above the Personal Allowance Limit}
-The standard Personal Allowance is applicable to an upper limit
-of \Sexpr{prettyL(allow_upper)}:~--
+The standard Personal Allowance applies to annual income up to an upper limit of
+\Sexpr{prettyL(allow_upper)}:~--
 
 <<>>=
 incometax(100000)
@@ -167,20 +201,23 @@ For every \pounds2 of income above this \Sexpr{prettyL(allow_upper)} limit,
 the Personal Allowance decreases by~\pounds1:~--
 
 <<>>=
-incometax(100000 + 4000)
+incometax(104000)
 
-incometax(100000 + 20000)
+incometax(120000)
 @
 
-Hence, at an income of \Sexpr{prettyL(allow_upper + std_allow * 2)}, Personal Allowance is zero:~--
+Hence, at an annual income of \Sexpr{prettyL(allow_upper + std_allow * 2)}, Personal Allowance is
+zero:~--
 
 <<>>=
 incometax(125140)
 @
 
+\pagebreak
 \section{Income Above the Higher Rate Band}
-Incomes more than \pounds6 above the sum of the basic and higher rate bands (\Sexpr{prettyL(sumband)}),
-i.e. above \Sexpr{(prettyL(sumband + 6))}, attract additional rate tax:~--
+Annual income more than \pounds6 above the sum of the basic and higher rate bands
+(\Sexpr{prettyL(sumband)}), i.e., above \Sexpr{(prettyL(sumband + 6))}, attracts additional rate
+tax:~--
 
 <<>>=
 incometax(125139 + 6)
@@ -196,7 +233,7 @@ incometax(125139 + 4 + 7)
 7 * 0.45
 @
 
-Income more than \pounds18 above \Sexpr{prettyL(sumband)} attracts the full amount of
+Annual income more than \pounds18 above \Sexpr{prettyL(sumband)} attracts the full amount of
 additional rate tax:~--
 
 <<>>=
@@ -230,27 +267,112 @@ incometax(100000, -1000)
 incometax(100000 + 1000)
 @
 
-\section{Calculating a Personal Allowance or Pay Adjustment}
-
-Calculate the Personal Allowance required to recoup a tax deficit of \pounds600 at a salary of
-\pounds10000 i.e., below the \Sexpr{prettyL(std_allow)} standard personal allowance:~--
+\section{Calculating a Bespoke Personal Allowance \\or Pay Adjustment}
+\subsection{Calculating an \emph{exact} Personal Allowance}
+The \emph{exact} Personal Allowance required to recoup a tax deficit may be calculated using
+\code{allowance()} with its third argument \code{round10 = FALSE}; for example for a deficit of 
+\pounds600 at an annual income of \pounds10,000 i.e., below the \Sexpr{prettyL(std_allow)} standard
+Personal Allowance and not usually attracting any income tax:~--
 
 <<>>=
-allowance(10000, 600)
+allowance(10000, 600, FALSE)
 @
 
-Demonstrate that the expected \pounds600 in tax is recouped:~--
+Using this allowance, the intended additional amount of \emph{exactly} \pounds600 tax is
+recouped:~--
 
 <<>>=
 incometax(10000, 6991)
 @
 
-%In practice this would be achieved through a tax code of 699L, see
-In practice this would be achieved through tax code \textsf{699L}, see
-\href{https://www.gov.uk/tax-codes/what-your-tax-code-means}{What your tax code means}.
+\subsection{Calculating a \emph{rounded} Personal Allowance}
+In practice, this deficit would be recouped through use of tax code in which the last digit of the
+required Personal Allowance is replaced with the letter  \textsf{L}, see
+\href{https://www.gov.uk/tax-codes/what-your-tax-code-means}{What your tax code means} e.g., in the
+previous example \textsf{699L}. The corresponding allowance rounded down\footnote{Rounding
+  \emph{down} the Personal Allowance ensures recoup of a sum of tax \emph{not less than} that
+  required.} to the nearest \pounds10 is obtained using \code{allowance()} with its third argument
+\code{round10 = TRUE} (the~default):~--
 
 <<>>=
-incometax(10000, round(6991, -1))
+allowance(10000, 600)
+@
+
+Using this allowance, the intended additional amount of \emph{at least} \pounds600 tax is
+recouped:~--
+
+<<>>=
+incometax(10000, 6990)
+@
+
+\pagebreak
+An annual income of \Sexpr{prettyL(std_allow + 1009)} i.e., \pounds1,009 above the
+\Sexpr{prettyL(std_allow)} standard Personal Allowance usually attracts \pounds200 in income tax:~--
+
+<<>>=
+incometax(13579)
+@
+
+To calculate the Personal Allowance required to recoup a tax deficit of an \emph{additional}
+\pounds600 at this income:~--
+
+<<>>=
+allowance(13579, 200 + 600)
+@
+
+Using this allowance, the intended additional amount of \emph{at least} \pounds600 tax is recouped,
+i.e., a total of at least \pounds800:~--
+
+<<>>=
+incometax(13579, 9570)
+@
+
+An annual income of \Sexpr{prettyL(std_allow + basicband + 1009)} i.e., \pounds1,009 above the basic
+rate band, at the standard Personal Allowance, usually attracts \pounds7,940 in income tax:~--
+
+<<>>=
+incometax(51279)
+@
+
+To calculate the Personal Allowance required to recoup a tax deficit of an \emph{additional}
+\pounds1,200 at this income:~--
+
+<<>>=
+allowance(51279, 7940 + 1200)
+@
+
+Using this allowance, the intended additional amount of \emph{at least} \pounds1,200 tax is
+recouped, i.e., a total of at least \pounds9,140:~--
+
+<<>>=
+incometax(51279, 9570)
+@
+
+\subsection{Calculating a Pay Adjustment}
+A tax deficit too great to recoup through reduction in Personal Allowance may instead be recouped
+using a \href{https://www.gov.uk/tax-codes/k-in-your-tax-code}{K code pay adjustment}. For example,
+an annual income of \Sexpr{prettyL(allow_upper + std_allow)}, at which there is half of the standard
+Personal Allowance, usually attracts \Sexpr{prettyL(sum(incometax(allow_upper + std_allow)))} in
+income tax:~--
+
+<<>>=
+incometax(112570)
+@
+
+To calculate the pay adjustment required to recoup a tax deficit of an \emph{additional}
+\pounds3,500 at this income:~--
+
+<<>>=
+allowance(112570, 34970.4 + 3500)
+@
+
+Using this pay adjustment, adjusted taxable income is
+\Sexpr{prettyL(attr(incometax(allow_upper + std_allow, -2460), "taxable"))}
+at which the intended additional amount of \emph{at least} \pounds3,500 tax is recouped, i.e., a
+total of at least \Sexpr{prettyL(sum(incometax(allow_upper + std_allow, -2460)))}:~--
+
+<<>>=
+incometax(112570, -2460)
 @
 
 \end{document}

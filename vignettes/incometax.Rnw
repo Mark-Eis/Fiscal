@@ -50,10 +50,10 @@ additionalrate <- tax_opts()$rate[3] * 100
 Wales, and is intended to replicate the estimates of GOV.UK
 \href{https://www.gov.uk/estimate-income-tax}{Estimate your Income Tax for the current year}\footnote{
   \code{incometax()} does not currently calculate \emph{National Insurance} (NI)
-contributions, and should therefore return values equal to the estimates from the GOV.UK website
-with \dQuote{no} as the answer to the question \sQuote{Are you over the State Pension age?} For NI
-information see:
-\href{https://www.gov.uk/government/publications/rates-and-allowances-national-insurance-contributions/rates-and-allowances-national-insurance-contributions}{Rates and allowances: National Insurance contributions.}}.
+  contributions, and should therefore return values equal to the estimates from the GOV.UK website
+  with \dQuote{yes} as the answer to the question \sQuote{Are you over the State Pension age?} For
+  NI information see:
+  \href{https://www.gov.uk/government/publications/rates-and-allowances-national-insurance-contributions/rates-and-allowances-national-insurance-contributions}{Rates and allowances: National Insurance contributions.}}.
 
 Tax is paid on the amount of taxable income remaining after the
 \href{https://www.gov.uk/income-tax-rates}{Personal Allowance} has been deducted, and is allocated
@@ -74,17 +74,17 @@ Hence currently in 2026:~--
 \begin{itemize}
 \item annual taxable income after allowances---e.g., the standard Personal Allowance of
   \Sexpr{prettyL(std_allow)}---up to \Sexpr{prettyL(basicband)} attracts \Sexpr{basicrate}\% basic
-  rate income tax\footnote{In practice, an additional \pounds9 income is allowed before basic and
-    higher rate tax is applied.};
+    rate income tax\footnote{In practice, an additional \pounds9 annual income is allowed before
+      basic and higher rate tax is applied.};
 \item annual taxable income after allowances between \Sexpr{prettyL(basicband + 1)} and
   \Sexpr{prettyL(sumband)} attracts\\ \Sexpr{higherrate}\% higher rate income tax---noting that the
   standard Personal Allowance is reduced above \Sexpr{prettyL(allow_upper)};
 \item annual taxable income after allowances above \Sexpr{prettyL(sumband)} attracts
   \Sexpr{additionalrate}\% additional rate income tax---noting there is no standard Personal
   Allowance at or above \Sexpr{prettyL(allow_upper + std_allow * 2)}\footnote{In practice,
-    an additional \pounds6 income is allowed before additional rate tax is applied; the additional
-    \pounds6 is decreased by \pounds1 for every further \pounds2 increase in income beyond
-    \Sexpr{prettyL(sumband + 7)}.}.
+    an additional \pounds6 annual income is allowed before additional rate tax is applied; the
+    additional \pounds6 is decreased by \pounds1 for every further \pounds2 increase in income
+    beyond \Sexpr{prettyL(sumband + 7)}.}.
 \end{itemize}
 
 See GOV.UK 
@@ -304,14 +304,15 @@ incometax(10000, 6990)
 @
 
 An annual income of \Sexpr{prettyL(std_allow + 1009)} i.e., \pounds1,009 above the
-\Sexpr{prettyL(std_allow)} standard Personal Allowance usually attracts \pounds200 in income tax:~--
+\Sexpr{prettyL(std_allow)} standard Personal Allowance, usually attracts \pounds200 in income
+tax:~--
 
 <<>>=
 incometax(13579)
 @
 
-The Personal Allowance required to recoup a tax deficit of an \emph{additional} \pounds600 at this\\
-income is:~--
+At this income, the Personal Allowance required to recoup an \emph{additional} \pounds600 tax\\
+deficit is:~--
 
 <<>>=
 allowance(13579, 200 + 600)
@@ -333,8 +334,8 @@ attracts \pounds7,940 in income tax:~--
 incometax(51279)
 @
 
-The Personal Allowance required to recoup a tax deficit of an \emph{additional} \pounds1,200 at this
-income is:~--
+At this income, the Personal Allowance required to recoup an \emph{additional} \pounds1,200 tax\\
+deficit is:~--
 
 <<>>=
 allowance(51279, 7940 + 1200)
@@ -359,8 +360,8 @@ income tax:~--
 incometax(112570)
 @
 
-To calculate the pay adjustment required to recoup a tax deficit of an \emph{additional}
-\pounds3,500 at this income:~--
+The pay adjustment required to recoup a tax deficit of an \emph{additional} \pounds3,500 at this\\
+income is:~--
 
 <<>>=
 allowance(112570, 34970.4 + 3500)

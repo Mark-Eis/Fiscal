@@ -249,15 +249,14 @@ using a negative value for argument \code{allowance}:~--
 incometax(125139, -10000)
 @
 
-Although in this last example the result is equivalent to that obtained by adding the value of the
-pay adjustment to argument \code{income} (viz. the penultimate example):~--
+In this last example the result is equivalent to that obtained by adding the value of the pay
+adjustment to argument \code{income} (viz. the penultimate example):~--
 
 <<>>=
 all.equal(incometax(125139, -10000), incometax(125139 + 10000), check.attributes = FALSE)
 @
 
-However, that equivalence may not always be
-the~case:~--
+However, that equivalence may not always be the case:~--
 
 <<>>=
 incometax(100000, -1000)
@@ -276,8 +275,7 @@ Personal Allowance and not usually attracting any income tax:~--
 allowance(10000, 600, FALSE)
 @
 
-Using this allowance, the additional amount of \emph{exactly} \pounds600 tax is recouped as
-intended:~--
+As intended using this allowance, an \emph{exact} total of \pounds600 income tax is recouped:~--
 
 <<>>=
 incometax(10000, 6991)
@@ -296,8 +294,7 @@ using \code{allowance()} with its third argument \code{round10 = TRUE} (the~defa
 allowance(10000, 600)
 @
 
-Using this allowance, the additional amount of \emph{at least} \pounds600 tax is recouped as
-intended:~--
+As intended using this allowance, a total of \emph{at least} \pounds600 income tax is recouped:~--
 
 <<>>=
 incometax(10000, 6990)
@@ -319,8 +316,8 @@ allowance(13579, 200 + 600)
 @
 
 \pagebreak
-Using this allowance, the additional amount of \emph{at least} \pounds600 tax is recouped as
-intended i.e., total income tax at least \pounds800:~--
+As intended using this allowance, a total of \emph{at least} \pounds800 income tax is recouped i.e.,
+\\an additional amount of at least \pounds600:~--
 
 <<>>=
 incometax(13579, 9570)
@@ -341,8 +338,8 @@ deficit is:~--
 allowance(51279, 7940 + 1200)
 @
 
-Using this allowance, the additional amount of \emph{at least} \pounds1,200 tax is recouped as
-intended i.e., total income tax at least \pounds9,140:~--
+As intended using this allowance, a total of \emph{at least} \pounds9,140 income tax is recouped
+i.e.,\\an additional amount of at least \pounds1,200:~--
 
 <<>>=
 incometax(51279, 9570)
@@ -368,9 +365,9 @@ allowance(112570, 34970.4 + 3500)
 @
 
 Using this pay adjustment, taxable income is adjusted to
-\Sexpr{prettyL(attr(incometax(allow_upper + std_allow, -2460), "taxable"))} and the additional
-amount of \emph{at least} \pounds3,500 tax is recouped as intended i.e., total income tax at
-least \Sexpr{prettyL(sum(incometax(allow_upper + std_allow, -2460)))}:~--
+\Sexpr{prettyL(attr(incometax(allow_upper + std_allow, -2460), "taxable"))} and as intended, a total
+of \emph{at least} \Sexpr{prettyL(sum(incometax(allow_upper + std_allow, -2460)))} income tax is
+recouped i.e., an additional amount of  at least \pounds3,500:~--
 
 <<>>=
 incometax(112570, -2460)

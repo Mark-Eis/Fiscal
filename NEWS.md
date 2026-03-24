@@ -1,3 +1,7 @@
+# Fiscal dev. (2026-03-24)
+
+* Correct `\VignetteIndexEntry` in incometax.Rnw (#19)
+
 # Fiscal 1.0.1 (2026-03-24)
 
 * Update `allowance()` documentation (#21).

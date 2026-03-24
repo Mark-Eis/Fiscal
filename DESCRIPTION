@@ -1,8 +1,8 @@
 Package: Fiscal
 Type: Package
 Title: Income Tax Calculations (UK)
-Version: 1.0.0.9000
-Date: 2026-03-21
+Version: 1.0.1
+Date: 2026-03-24
 Authors@R: 
     person("Mark", "Eisler", email = "mark@markeisler.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-6843-3345"))

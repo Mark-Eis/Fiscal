@@ -31,14 +31,14 @@ of income tax as calculated by \code{\link{incometax}(taxable)}, plus the additi
 tax deficit. If \code{round10 = TRUE}, as by default, the return value will be rounded down to the
 nearest £10, in keeping with GOV.UK
 \href{https://www.gov.uk/tax-codes/what-your-tax-code-means}{tax codes}. Rounding down ensures that,
-if anything, tax is very slightly overpaid and not underpaid. Argument \code{opts} specifying values
-for tax bands, rates and allowances must be provided using \code{\link{tax_opts}()}, which by
-default gives GOV.UK
+if anything, the required tax is very slightly overestimated and not underestimated. Argument
+\code{opts} specifying values for tax bands, rates and allowances must be provided using
+\code{\link{tax_opts}()}, which by default gives GOV.UK
 \href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past}{values for 2025-2027 tax years}.
 }
 \value{
 A \code{numeric}, representing value of the Personal Allowance or if negative, pay adjustment,
-required to recoup the deficit.
+required to recoup the tax deficit.
 }
 \references{
 GOV.UK: --
@@ -64,7 +64,7 @@ Vignette: \href{../doc/incometax.pdf}{PAYE income tax calculator for England, No
 \examples{
 
 ###
-## Personal Allowance to recoup a tax deficit
+## Personal Allowance to recoup a given tax deficit
 
 ## An annual income of £13,579 i.e., £1,009 above the £12,570
 ## standard Personal Allowance, usually attracts £200 in income tax: –
@@ -79,7 +79,7 @@ allowance(13579, 200 + 600)
 incometax(13579, 9570)
 
 ###
-## Pay Adjustment to recoup a tax deficit
+## Pay Adjustment to recoup a given tax deficit
 
 ## An annual income of £112,570, at which the standard Personal Allowance
 ## decreases by half, usually attracts £34,970.4 in income tax: –

@@ -48,24 +48,23 @@ income is \taxoptL{allow_upper + 2 * std_allow} or above.
 
 Hence currently in 2026: --
 \itemize{
- \item taxable income after allowances---e.g., the standard Personal Allowance of 
+ \item annual taxable income after allowances---e.g., the standard Personal Allowance of 
     \taxoptL{std_allow}---up to \taxoptL{band[1]} attracts \taxoptpc{rate[1]}\% basic rate income
     tax;
-  \item taxable income after allowances between \taxoptL{band[1] + 1} and \taxoptL{sum(band)}
+  \item annual taxable income after allowances between \taxoptL{band[1] + 1} and \taxoptL{sum(band)}
     attracts \taxoptpc{rate[2]}\% higher rate income tax---noting that the standard Personal
-    Allowance is reduced above \taxoptL{allow_upper}; and
-  \item taxable income after allowances above \taxoptL{sum(band)} attracts \taxoptpc{rate[3]}\%
-    additional rate income tax---noting there is no standard Personal Allowance at or above
-    \taxoptL{allow_upper + 2 * std_allow}.
+    Allowance is reduced above \taxoptL{allow_upper};
+  \item annual taxable income after allowances above \taxoptL{sum(band)} attracts
+    \taxoptpc{rate[3]}\% additional rate income tax---noting there is no standard Personal Allowance
+    at or above \taxoptL{allow_upper + 2 * std_allow}.
 }
 See GOV.UK 
 \href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands}{Income Tax rates and allowances for current and previous tax years: Tax rates and bands}.
 
 Argument \code{allowance} may be used to specify a bespoke Personal Allowance, or if negative, a
 \href{https://www.gov.uk/tax-codes/k-in-your-tax-code}{K code pay adjustment}; otherwise, its
-default value will be calculated using \code{\link{pers_allow}(income, opts)}.
-
-Argument \code{opts} specifying values for tax bands, rates and allowances must be provided using
+default value will be calculated using \code{\link{pers_allow}(income, opts)}. Argument \code{opts}
+specifying values for tax bands, rates and allowances must be provided using
 \code{\link{tax_opts}()}, which by default gives GOV.UK
 \href{https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past}{values for 2025-2027 tax years}.
 
@@ -92,7 +91,7 @@ GOV.UK: --
 }
 \note{
 \enumerate{
-\item In practice, an additional £9 income is allowed before basic and higher rate tax is applied.
+\item In practice, an additional £9 income is allowed before basic and higher rate tax are applied.
 \item An additional £6 income is allowed before additional rate tax is applied; the additional £6 is
 decreased by £1 for every further £2 increase in income beyond \taxoptL{sum(band) + 7}.
 \item \code{incometax()} does not currently calculate \emph{National Insurance} (NI) contributions, and
@@ -151,4 +150,10 @@ incometax(6570 + 9 + 10000, 6570)
 ## Specifying a pay adjustment using
 ## a negative `allowance` argument
 incometax(125139, -10000)
+
+\dontrun{
+###
+## For further examples, see: -
+    vignette("incometax")
+}
 }

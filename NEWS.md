@@ -1,4 +1,10 @@
-# Fiscal 1.0.1 (2026-03-17)
+# Fiscal 1.0.1 (2026-03-24)
+
+* Update `allowance()` documentation (#21).
+
+* Add arg `round10` to `allowance()`, when `TRUE` (default) to round down return value to nearest £10 (#20).
+
+* Proof and correct documentation (#19).
 
 * Revised `format.incometax()` headings to be more consistent with GOV.UK website (#18).
 

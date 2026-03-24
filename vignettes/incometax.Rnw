@@ -360,8 +360,8 @@ income tax:~--
 incometax(112570)
 @
 
-The pay adjustment required to recoup a tax deficit of an \emph{additional} \pounds3,500 at this\\
-income is:~--
+At this income, the pay adjustment required to recoup an \emph{additional} \pounds3,500 tax\\
+deficit is:~--
 
 <<>>=
 allowance(112570, 34970.4 + 3500)

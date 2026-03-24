@@ -99,7 +99,7 @@ GOV.UK: --
 \item \code{incometax()} does not currently calculate \emph{National Insurance} (NI) contributions,
   and should therefore return values equal to the estimates from the GOV.UK website
   (\href{https://www.gov.uk/estimate-income-tax}{Estimate your Income Tax for the current year}) with
-  \dQuote{no} as the answer to the question \sQuote{Are you over the State Pension age?} For NI
+  \dQuote{yes} as the answer to the question \sQuote{Are you over the State Pension age?} For NI
   information see:
   \href{https://www.gov.uk/government/publications/rates-and-allowances-national-insurance-contributions/rates-and-allowances-national-insurance-contributions}{Rates and allowances: National Insurance contributions}.
 }
@@ -120,15 +120,12 @@ Vignette: \href{../doc/incometax.pdf}{PAYE income tax calculator for England, No
 ## income attracts no tax 
 incometax(12570)
 
-## After the standard Personal Allowance
-## (and a further £9), income
-## attracts base rate tax
+## After the standard Personal Allowance (and a further £9),
+## income attracts base rate tax
 incometax(12570 + 9 + 1000)
 
-## After the standard Personal Allowance,
-## (and a further £9), income above
-## the base rate band attracts
-## higher rate tax
+## After the standard Personal Allowance (and a further £9),
+## income above the base rate band attracts higher rate tax
 incometax(12570 + 9 + 37700 + 1000)
 
 ## For every £2 of income above its £100,000 upper limit,

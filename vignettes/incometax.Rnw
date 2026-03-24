@@ -17,7 +17,7 @@
 
 \title{PAYE income tax calculator for England, Northern~Ireland and Wales}
 \author{Mark Eisler}
-% \VignetteIndexEntry{Converting numeric values to class "Date"}
+% \VignetteIndexEntry{PAYE income tax calculator for England, Northern~Ireland and Wales}
 % \VignettePackage{Fiscal}
 
 \begin{document}

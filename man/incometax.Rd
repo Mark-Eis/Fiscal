@@ -39,12 +39,12 @@ attracts \emph{basic rate} tax; income exceeding the basic rate band by an amoun
 including the upper limit of the higher rate band attracts \emph{higher rate} tax; and income
 exceeding the sum of the basic and higher rate bands attracts \emph{additional rate} tax.
 
-The \href{https://www.gov.uk/income-tax-rates}{standard Personal Allowance} is the amount of taxable
-income on which there is no tax liability, currently \taxoptL{std_allow}. The Personal Allowance
-goes down by £1 for every £2 that
+The \href{https://www.gov.uk/income-tax-rates}{standard Personal Allowance} is the amount of annual
+taxable income on which there is no tax liability, currently \taxoptL{std_allow}. The Personal
+Allowance goes down by £1 for every £2 that
 \href{https://www.gov.uk/guidance/adjusted-net-income}{adjusted net income} is above an upper
-threshold, currently \taxoptL{allow_upper}. This means the Personal Allowance is zero if taxable
-income is \taxoptL{allow_upper + 2 * std_allow} or above.
+threshold, currently \taxoptL{allow_upper}. This means the Personal Allowance is zero if annual
+taxable income is \taxoptL{allow_upper + 2 * std_allow} or above.
 
 Hence currently in 2026: --
 \itemize{
@@ -91,15 +91,17 @@ GOV.UK: --
 }
 \note{
 \enumerate{
-\item In practice, an additional £9 income is allowed before basic and higher rate tax are applied.
-\item An additional £6 income is allowed before additional rate tax is applied; the additional £6 is
-decreased by £1 for every further £2 increase in income beyond \taxoptL{sum(band) + 7}.
-\item \code{incometax()} does not currently calculate \emph{National Insurance} (NI) contributions, and
-should therefore return values equal to the estimates from the GOV.UK website
-(\href{https://www.gov.uk/estimate-income-tax}{Estimate your Income Tax for the current year}) with
-\dQuote{no} as the answer to the question \sQuote{Are you over the State Pension age?} For NI
-information see:
-\href{https://www.gov.uk/government/publications/rates-and-allowances-national-insurance-contributions/rates-and-allowances-national-insurance-contributions}{Rates and allowances: National Insurance contributions}.
+\item In practice, an additional £9 annual income is allowed before basic and higher rate tax are
+  applied.
+\item An additional £6 annual income is allowed before additional rate tax is applied; the
+  additional £6 is decreased by £1 for every further £2 increase in income beyond
+  \taxoptL{sum(band) + 7}.
+\item \code{incometax()} does not currently calculate \emph{National Insurance} (NI) contributions,
+  and should therefore return values equal to the estimates from the GOV.UK website
+  (\href{https://www.gov.uk/estimate-income-tax}{Estimate your Income Tax for the current year}) with
+  \dQuote{no} as the answer to the question \sQuote{Are you over the State Pension age?} For NI
+  information see:
+  \href{https://www.gov.uk/government/publications/rates-and-allowances-national-insurance-contributions/rates-and-allowances-national-insurance-contributions}{Rates and allowances: National Insurance contributions}.
 }
 }
 

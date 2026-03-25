@@ -67,31 +67,31 @@ Vignette: \href{../doc/incometax.pdf}{PAYE income tax calculator for England, No
 ## Personal Allowance to recoup a given tax deficit
 
 ## An annual income of £13,579 i.e., £1,009 above the £12,570
-## standard Personal Allowance, usually attracts £200 in income tax: –
+## standard Personal Allowance, usually attracts £200 total income tax: –
 incometax(13579)
 
 ## At this income, the Personal Allowance required 
 ## to recoup an additional £600 tax deficit is: –
 allowance(13579, 200 + 600)
 
-## Using this allowance, the additional amount of at least £600 tax
-## is recouped as intended i.e., total income tax at least £800: –
+## As intended using this allowance, a total of at least £800 income tax
+## is recouped i.e., an additional amount of at least £600 –
 incometax(13579, 9570)
 
 ###
 ## Pay Adjustment to recoup a given tax deficit
 
 ## An annual income of £112,570, at which the standard Personal Allowance
-## decreases by half, usually attracts £34,970.4 in income tax: –
+## decreases by half to £6,285, usually attracts £34,970.4 total income tax: –
 incometax(112570)
 
 ## At this income, the pay adjustment required 
 ## to recoup an additional £3,500 tax deficit is: –
 allowance(112570, 34970.4 + 3500)
 
-## Using this pay adjustment, taxable income is adjusted to £115,030
-## and the additional amount of at least £3,500 tax is recouped
-## as intended i.e., total income tax at least £38,472:–
+## Using this pay adjustment, taxable income is adjusted to £115,030 and
+## as intended, a total of at least £38,472 income tax is recouped
+## i.e., an additional amount of at least £3,500: –
 incometax(112570, -2460)
 
 \dontrun{

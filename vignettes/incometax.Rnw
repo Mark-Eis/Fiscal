@@ -350,15 +350,23 @@ incometax(51279, 9570)
 A tax deficit too large to recoup through a reduction in Personal Allowance may instead be recouped
 using a \href{https://www.gov.uk/tax-codes/k-in-your-tax-code}{pay adjustment}. For example, an
 annual income of \Sexpr{prettyL(allow_upper + std_allow)}, at which the standard Personal Allowance
-decreases by half, usually attracts \Sexpr{prettyL(sum(incometax(allow_upper + std_allow)))} in
-income tax:~--
+decreases by half to \Sexpr{prettyL(std_allow / 2)}, usually attracts
+\Sexpr{prettyL(sum(incometax(allow_upper + std_allow)))} in income tax:~--
 
 <<>>=
 incometax(112570)
 @
 
-At this income, the pay adjustment required to recoup an \emph{additional} \pounds3,500 tax\\
-deficit is:~--
+At this income, removing the Personal Allowance entirely would still not be sufficient to recoup an
+\emph{additional} tax deficit of say \pounds3,500 i.e., a total of
+\Sexpr{prettyL(sum(incometax(112570), 3500))} income tax:~--
+
+<<>>=
+incometax(112570, 0)
+@
+
+Instead, a pay adjustment is required, as indicated by the negative value returned by
+\code{allowance()}:~--
 
 <<>>=
 allowance(112570, 34970.4 + 3500)

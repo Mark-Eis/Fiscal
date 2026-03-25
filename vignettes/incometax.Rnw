@@ -301,7 +301,7 @@ incometax(10000, 6990)
 @
 
 An annual income of \Sexpr{prettyL(std_allow + 1009)} i.e., \pounds1,009 above the
-\Sexpr{prettyL(std_allow)} standard Personal Allowance, usually attracts \pounds200 in income
+\Sexpr{prettyL(std_allow)} standard Personal Allowance, usually attracts \pounds200 total income
 tax:~--
 
 <<>>=
@@ -325,7 +325,7 @@ incometax(13579, 9570)
 
 At the standard Personal Allowance, an annual income of
 \Sexpr{prettyL(std_allow + basicband + 1009)} i.e., \pounds1,009 above the basic rate band, usually
-attracts \pounds7,940 in income tax:~--
+attracts \pounds7,940 total income tax:~--
 
 <<>>=
 incometax(51279)
@@ -351,7 +351,7 @@ A tax deficit too large to recoup through a reduction in Personal Allowance may 
 using a \href{https://www.gov.uk/tax-codes/k-in-your-tax-code}{pay adjustment}. For example, an
 annual income of \Sexpr{prettyL(allow_upper + std_allow)}, at which the standard Personal Allowance
 decreases by half to \Sexpr{prettyL(std_allow / 2)}, usually attracts
-\Sexpr{prettyL(sum(incometax(allow_upper + std_allow)))} in income tax:~--
+\Sexpr{prettyL(sum(incometax(allow_upper + std_allow)))} total income tax:~--
 
 <<>>=
 incometax(112570)

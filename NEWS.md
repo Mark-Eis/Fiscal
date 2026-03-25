@@ -1,6 +1,8 @@
-# Fiscal dev. (2026-03-24)
+# Fiscal devel. (2026-03-25)
 
-* Correct `\VignetteIndexEntry` in incometax.Rnw (#19)
+* Proof and correct documentation (#19).
+
+* Correct `\VignetteIndexEntry` in incometax.Rnw (#19).
 
 # Fiscal 1.0.1 (2026-03-24)
 

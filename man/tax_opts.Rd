@@ -55,11 +55,6 @@ GOV.UK \href{https://www.gov.uk/government/publications/rates-and-allowances-inc
 \author{
 \packageAuthor{Fiscal}
 }
-% \note{
-%%  ~~further notes~~
-% }
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 
@@ -83,16 +78,20 @@ with(tax_opts(), allow_upper)
 ## Typical income threshold for higher rate income tax
 with(tax_opts(), sum(std_allow, band[1]))
 
-## Amount over personal allowance at which
-## additional rate income tax becomes payable
+## Amount over personal allowance above which
+## additional rate income tax is payable
 with(tax_opts(), sum(band[1], band[2]))
+
+## Save hypothetical new rates as an object of class "tax_opts"
+(newrates <- tax_opts(
+    rate = c(0.19, 0.35, 0.43),
+    std_allow = 14570,
+    allow_upper = 102000))
+
+## Use new rates in hypothetical tax estimations
+incometax(120000,, newrates)
+
+allowance(120000, 34015.35 + 6000,, newrates)
+
+incometax(120000, -10370, newrates)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory (show via RShowDoc("KEYWORDS")):
-% \keyword{ ~kwd1 }
-% \keyword{ ~kwd2 }
-% Use only one keyword per line.
-% For non-standard keywords, use \concept instead of \keyword:
-% \concept{ ~cpt1 }
-% \concept{ ~cpt2 }
-% Use only one concept per line.

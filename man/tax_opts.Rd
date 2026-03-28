@@ -78,7 +78,7 @@ with(tax_opts(), allow_upper)
 ## Typical income threshold for higher rate income tax
 with(tax_opts(), sum(std_allow, band[1]))
 
-## Amount over personal allowance above which
+## Amount, after personal allowance, above which
 ## additional rate income tax is payable
 with(tax_opts(), sum(band[1], band[2]))
 

@@ -267,15 +267,17 @@ incometax(100000 + 1000)
 \section{Calculating a Bespoke Personal Allowance \\or Pay Adjustment}
 \subsection{Calculating an \emph{exact} Personal Allowance}
 The \emph{exact} Personal Allowance required to recoup a given tax deficit may be calculated using
-\code{allowance()} with its third argument \code{round10 = FALSE}; for example for a deficit of 
-\pounds600 at an annual income of \pounds10,000 i.e., below the \Sexpr{prettyL(std_allow)} standard
-Personal Allowance and not usually attracting any income tax:~--
+\code{allowance()} with its third argument \code{round10 = FALSE}. For example, at an annual income
+of \pounds10,000 i.e., below the \Sexpr{prettyL(std_allow)} standard Personal Allowance and not
+usually attracting any income tax, the Personal Allowance required to recoup a tax deficit of
+\pounds600 is:~--
 
 <<>>=
 allowance(10000, 600, FALSE)
 @
 
-As intended using this allowance, an \emph{exact} total of \pounds600 income tax is recouped:~--
+As intended using this Personal Allowance, an \emph{exact} total of \pounds600 income tax is
+recouped:~--
 
 <<>>=
 incometax(10000, 6991)
@@ -286,15 +288,16 @@ In practice, this deficit would be recouped through use of a tax code in which t
 required Personal Allowance is replaced with the letter \textsf{L} e.g., in the previous example
 \textsf{699L}; see
 \href{https://www.gov.uk/tax-codes/what-your-tax-code-means}{What your tax code means}. The
-corresponding allowance rounded down\footnote{Rounding \emph{down} the Personal Allowance ensures
-  recoup of a sum of tax \emph{not less than} that required.} to the nearest \pounds10 is obtained
-using \code{allowance()} with its third argument \code{round10 = TRUE} (the~default):~--
+corresponding Personal Allowance rounded down\footnote{Rounding \emph{down} the Personal Allowance
+  ensures recoup of a sum of tax \emph{not less than} that required.} to the nearest \pounds10 is
+obtained using \code{allowance()} with its third argument \code{round10 = TRUE} (the~default):~--
 
 <<>>=
 allowance(10000, 600)
 @
 
-As intended using this allowance, a total of \emph{at least} \pounds600 income tax is recouped:~--
+As intended using this Personal Allowance, a total of \emph{at least} \pounds600 income tax is
+recouped:~--
 
 <<>>=
 incometax(10000, 6990)
@@ -316,8 +319,8 @@ allowance(13579, 200 + 600)
 @
 
 \pagebreak
-As intended using this allowance, a total of \emph{at least} \pounds800 income tax is recouped i.e.,
-\\an additional amount of at least \pounds600:~--
+As intended using this Personal Allowance, a total of \emph{at least} \pounds800 income tax is
+recouped i.e., an additional amount of at least \pounds600:~--
 
 <<>>=
 incometax(13579, 9570)
@@ -338,8 +341,8 @@ deficit is:~--
 allowance(51279, 7940 + 1200)
 @
 
-As intended using this allowance, a total of \emph{at least} \pounds9,140 income tax is recouped
-i.e.,\\an additional amount of at least \pounds1,200:~--
+As intended using this Personal Allowance, a total of \emph{at least} \pounds9,140 income tax is
+recouped i.e., an additional amount of at least \pounds1,200:~--
 
 <<>>=
 incometax(51279, 9570)
@@ -350,32 +353,33 @@ incometax(51279, 9570)
 A tax deficit too large to recoup through a reduction in Personal Allowance may instead be recouped
 using a \href{https://www.gov.uk/tax-codes/k-in-your-tax-code}{pay adjustment}. For example, an
 annual income of \Sexpr{prettyL(allow_upper + std_allow)}, at which the standard Personal Allowance
-decreases by half to \Sexpr{prettyL(std_allow / 2)}, usually attracts
-\Sexpr{prettyL(sum(incometax(allow_upper + std_allow)))} total income tax:~--
+decreases by half to \Sexpr{prettyL(std_allow / 2)}, usually attracts a total of
+\Sexpr{prettyL(sum(incometax(allow_upper + std_allow)))} income tax:~--
 
 <<>>=
 incometax(112570)
 @
 
-At this income, removing the Personal Allowance entirely would still not be sufficient to recoup an
-\emph{additional} tax deficit of say \pounds3,500 i.e., a total of
+At this income, even to remove the Personal Allowance entirely would be insufficient to recoup, say,
+an \emph{additional} deficit of~\pounds3,500 tax i.e., a total of
 \Sexpr{prettyL(sum(incometax(112570), 3500))} income tax:~--
 
 <<>>=
 incometax(112570, 0)
 @
 
-Instead, a pay adjustment is required, as indicated by the negative value returned by
-\code{allowance()}:~--
+Consequently, \code{allowance()} returns a negative value, indicating that a pay adjustment is
+required instead:~--
 
 <<>>=
 allowance(112570, 34970.4 + 3500)
 @
 
-Using this pay adjustment, taxable income is adjusted to
+Passing a negative value as the second (\code{allowance}) argument of \code{incometax()} signifies a
+pay adjustment; taxable income is adjusted to
 \Sexpr{prettyL(attr(incometax(allow_upper + std_allow, -2460), "taxable"))} and as intended, a total
-of \emph{at least} \Sexpr{prettyL(sum(incometax(allow_upper + std_allow, -2460)))} income tax is
-recouped i.e., an additional amount of  at least \pounds3,500:~--
+of \emph{at least} \Sexpr{prettyL(sum(incometax(112570), 3500))} income tax is recouped i.e., an
+additional amount of  at least \pounds3,500:~--
 
 <<>>=
 incometax(112570, -2460)

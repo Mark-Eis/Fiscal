@@ -1,4 +1,4 @@
-# Fiscal devel. (2026-03-25)
+# Fiscal 1.0.2 (2026-03-31)
 
 * Proof and correct documentation (#19).
 

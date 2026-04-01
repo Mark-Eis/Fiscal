@@ -15,9 +15,9 @@
 \setlength{\textwidth}{140mm}
 \setlength{\oddsidemargin}{10mm}
 
-\title{PAYE income tax calculator for England, Northern~Ireland and Wales}
+\title{PAYE income tax calculator for England, Northern Ireland and Wales}
 \author{Mark Eisler}
-% \VignetteIndexEntry{PAYE income tax calculator for England, Northern~Ireland and Wales}
+% \VignetteIndexEntry{PAYE income tax calculator for England, Northern Ireland and Wales}
 % \VignettePackage{Fiscal}
 
 \begin{document}
